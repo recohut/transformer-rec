@@ -1,8 +1,5 @@
 name: CI
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:     
@@ -23,14 +20,14 @@ jobs:
         pip install -U git+https://github.com/tensorflow/docs
     - name: Notebook formatting and linting
       run: |
-        python3 -m tensorflow_docs.tools.nbfmt nbs
-        python3 -m tensorflow_docs.tools.nblint --fix nbs
+        python3 -m tensorflow_docs.tools.nbfmt docs
+        python3 -m tensorflow_docs.tools.nblint --fix docs
     - name: Building HTML site
       run: |
-        jupyter-book build .
+        jupyter-book build docs
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./_build/html
+        publish_dir: docs/_build/html
         publish_branch: gh-pages
