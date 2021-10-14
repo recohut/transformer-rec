@@ -1,5 +1,5 @@
 format: jb-book
-root: L838426_Transformer_based_Recommenders
+root: US780867_Transformer_based_Recommenders
 parts:
 - caption: Tutorials
   chapters:
