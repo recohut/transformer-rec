@@ -209,7 +209,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/L838426_Transformer_based_Recommenders.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/US780867_Transformer_based_Recommenders.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -234,7 +234,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/transformer-rec/main?urlpath=lab/tree/docs/L838426_Transformer_based_Recommenders.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/transformer-rec/main?urlpath=lab/tree/docs/US780867_Transformer_based_Recommenders.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -242,7 +242,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/transformer-rec/blob/main/docs/L838426_Transformer_based_Recommenders.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/transformer-rec/blob/main/docs/US780867_Transformer_based_Recommenders.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -265,6 +265,16 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#concepts">
+   Concepts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#baselines">
+   Baselines
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#models">
    Models
   </a>
@@ -275,13 +285,13 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#concepts">
-   Concepts
+  <a class="reference internal nav-link" href="#use-cases">
+   Use cases
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#use-cases">
-   Use Cases
+  <a class="reference internal nav-link" href="#tutorials">
+   Tutorials
   </a>
  </li>
 </ul>
@@ -297,59 +307,37 @@
                 
   <div class="section" id="transformer-based-recommenders">
 <h1>Transformer-based Recommenders<a class="headerlink" href="#transformer-based-recommenders" title="Permalink to this headline">¶</a></h1>
+<p>Early works on sequential recommendation usually capture sequential patterns from user historical interactions using Markov chains (MCs). For example, Shani et al. formalized recommendation generation as a sequential optimization problem and employ Markov Decision Processes (MDPs) to address it. Later, Rendle et al. combine the power of MCs and MF to model both sequential behaviors and general interests by Factorizing Personalized Markov Chains (FPMC). Besides the first-order MCs, high-order MCs are also adopted to consider more previous items.</p>
+<p>Recently, RNN and its variants, Gated Recurrent Unit (GRU) and Long Short-Term Memory (LSTM), are becoming more and more popular for modeling user behavior sequences. The basic idea of these methods is to encode user’s previous records into a vector (i.e., representation of user’s preference which is used to make predictions) with various recurrent architectures and loss functions, including session-based GRU with ranking loss (GRU4Rec), Dynamic Recurrent Basket Model (DREAM), user-based GRU, attention-based GRU (NARM), and improved GRU4Rec with new loss function (i.e., BPR-max and TOP1-max) and an improved sampling strategy.</p>
+<p>Sequential dynamics are a key feature of many modern recommender systems, which seek to capture the ‘context’ of users’ activities on the basis of actions they have performed recently. To capture such patterns, these two approaches have proliferated. Markov Chains assume that a user’s next action can be predicted on the basis of just their last (or last few) actions, while RNNs in principle allow for longer-term semantics to be uncovered. Generally speaking, MC-based methods perform best in extremely sparse datasets, where model parsimony is critical, while RNNs perform better in denser datasets where higher model complexity is affordable.</p>
+<p>Other than recurrent neural networks, various deep learning models are also introduced for sequential recommendation. For example, Tang and Wang propose a Convolutional Sequence Model (Caser) to learn sequential patterns using both horizontal and vertical convolutional filters. Chen et al. and Huang et al. employ Memory Network to improve sequential recommendation. STAMP captures both users’ general interests and current interests using an MLP network with attention.</p>
+<p>Sequential models (like RNNs) try to encode the user preferences into a single vector using left-to-right unidirectional sequence. The major limitation is that such unidirectional models restrict the power of hidden representation for items in the historical sequences, where each item can only encode the information from previous items. Another limitation is that previous unidirectional models are originally introduced for sequential data with natural order, e.g., text and time series data. They often assume a rigidly ordered sequence over data which is not always true for user behaviors in real-world applications. In fact, the choices of items in a user’s historical interactions may not follow a rigid order assumption due to various unobservable external factors. In such a situation, it is crucial to incorporate context from both directions in user behavior sequence modeling.</p>
+<p>Both session-based and sequential (i.e., next-basket) recommendation algorithms take advantage of additional temporal information to make better personalized recommendations. The main difference between session-based recommendations and sequential recommendations is that the former assumes that the user ids are not recorded and therefore the length of engagement sequences are relatively short. Therefore, session-based recommendations normally do not consider user factors. On the other hand, sequential recommendation treats each sequence as a user’s engagement history. Both settings, do not explicitly require time-stamps: only the relative temporal orderings are assumed known (in contrast to, for example, timeSVD++ using time-stamps).</p>
+<p>The task of session-based recommendation is to predict the next item that users would click from the current clicks sequence. Many kinds of proposals for session-based recommendation methods have been developed due to the highly practical value. Markov chain is a classic approach which assumes that the next action depends on the last or last few behaviors. Only considering a few of last behaviors makes the Markov chain based models unable to utilize the dependencies of behaviors in long sequences and also might suffer from data sparsity issues. Rendle et al. optimizes a pairwise ranking objective function via stochastic gradient descent, which ignores the temporal dependence among interactions and only considers some low-order interactions of latent factors. In recent years, many researches apply Recurrent Neural Networks (RNNs) for session-based recommendation and achieved much better performance than conventional methods. Hidasi et al. apply RNNs with ranking loss for session-based recommendation. Li et al. propose NARM which models the user’s sequential behavior and main purpose simultaneously. Liu et al. propose STAMP which is capable of capturing users’ general interests from the long-term memory of a session context. Ren et al. take repeat consumption phenomenon into account and introduce repeat explore mechanism, which significantly improve the performance under repeat session scenario. Wang et al. bring collaborative modeling into this field with an end-to-end model. However, the RNNs based methods is hard to learn the dependencies from long distance. When the session sequence becomes longer, the performance of RNNs based methods decrease significantly. Recently, Graph neural networks (GNNs) have revolutionized the field of session-based recommendation which was dominated by recurrent neural networks (RNNs) by considering the transitions of items. Wu et al. proposed SR-GNN which models session sequences as graph-structured data and capture complex transitions of items. Yu et al. propose a target attentive network which discover the relevance of target item with graph neural network. Chen et al. tackle information loss of GNN-based model by introducing shortcut graph attention and edge-order preserving aggregation layers. However, the GNNs based methods only learn the dependencies among adjacent items of the session graphs which is constructed from session sequences. When the items nodes are not adjacent in the session graph, their dependencies are hard to capture with GNNs even if their dependencies cannot be ignored.</p>
+<p>Although the methods above achieved promising results and become the state-of-the-arts, the recurrent neural networks are hard to learn item dependencies from long distance. The graph neural networks based methods only aggregate the information from adjacent items where items are closely connected in the session graph. An attention based model have merge in the field of natural language processing, named the Transformer proposed by Vaswani et al.. It achieved excellent performance in the WMT 2014 English-to-French and English-to-German translation tasks. The key factor of its success is self-attention mechanism which allow the model capture the dependencies between encoder and decoder. However, the encoder-decoder architecture of the Transformer is not suit for session-based recommendation which output size is not equal to input size. Xu et al. apply self-attention layers after graph neural network to learn long-range dependencies among the output of graph neural network. However, the dependencies among all items may lost during the aggregation of adjacent items with the graph neural network. Adjacent items in a session graph may not be close in latent space, and vice versa. This may lead to inaccurate item embedding learning. The self-attention layer is directly applied after embedding layer to reserve the global item dependencies in SR-SAN.</p>
 <p>To deal with sequential and session-based recommendation, many sequence learning algorithms previously applied in machine learning and NLP research have been explored for RecSys, based on k-Nearest Neighbors, Frequent Pattern Mining, Hidden Markov Models, Recurrent Neural Networks, and more recently neural architectures using the Self-Attention Mechanism and the Transformer architectures.</p>
-<p>Much of the recent progress in sequential and session-based recommendation has been driven by improvements in model architecture and pretraining techniques originating in the field of Natural Language Processing. Transformer architectures in particular have facilitated building higher-capacity models and provided data augmentation and training techniques which demonstrably improve the effectiveness of sequential recommendation.</p>
+<p>Much of the recent progress in sequential and session-based recommendation has been driven by improvements in model architecture and pre-training techniques originating in the field of Natural Language Processing. Transformer architectures in particular have facilitated building higher-capacity models and provided data augmentation and training techniques which demonstrably improve the effectiveness of sequential recommendation.</p>
+<div class="section" id="concepts">
+<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="baselines">
+<h2>Baselines<a class="headerlink" href="#baselines" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="models">
 <h2>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p>SASRec</p></li>
-<li><p>BERT4Rec</p></li>
-<li><p>BST</p></li>
-<li><p>SSE-PT</p></li>
-</ol>
 </div>
 <div class="section" id="tools">
 <h2>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p>Transformers4Rec</p></li>
-</ol>
-</div>
-<div class="section" id="concepts">
-<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p>Masked Language Modeling</p></li>
-<li><p>Permutation Language Modeling</p></li>
-<li><p>Causal Language Modeling</p></li>
-<li><p>Replacement Token Detection</p></li>
-</ol>
 </div>
 <div class="section" id="use-cases">
-<h2>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p>Santander Banking Product Recommendations</p></li>
-<li><p>Taobao</p></li>
-</ol>
-<p>See the sections of this tutorial to the left to get started!</p>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Tutorials</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="T034923_BERT4Rec_on_ML1M_in_PyTorch.html">BERT4Rec on ML-1M in PyTorch</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T595874_BERT4Rec_on_ML25M_in_PyTorch_Lightning.html">BERT4Rec on ML-25M</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T088416_BST_Implementation_in_MXNet.html">BST Implementation in MXNet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T602245_BST_implementation_in_PyTorch.html">BST implementation in PyTorch</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T007665_BST_on_ML1M_in_Keras.html">A Transformer-based recommendation system</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T881207_BST_PTLightning_ML1M.html">Rating prediction using the Behavior Sequence Transformer (BST) model on ML-1M dataset in PyTorch Lightning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T025247_BST_using_Deepctr_library.html">BST using Deepctr library</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T757997_SASRec_PyTorch.html">SASRec implementation with PyTorch Library</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T225287_SASRec_PaddlePaddle.html">SASRec implementation with Paddle Library</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T701627_SR_SAN_Session_based_Model.html">SR-SAN Session-based Recommender</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T975104_SSEPT_ML1M_Tensorflow1x.html">SSE-PT Personalized Transformer Recommender on ML-1M in Tensorflow 1.x</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T472955_GCSAN_Session_based_Model.html">GCSAN Session-based Recommender</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T970274_Transformers4Rec_Session_based_Recommender_on_Yoochoose.html">End-to-end session-based recommendation with Transformers4Rec</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T382183_Transformers4Rec_XLNet_on_Synthetic_data.html">Transformers4Rec XLNet on Synthetic data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="T793395_Session_based_recommendation_on_REES46_Dataset.html">End-to-end Session-based recommendation on REES46 Dataset</a></li>
-</ul>
+<h2>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h2>
 </div>
+<div class="section" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="T034923_BERT4Rec_on_ML1M_in_PyTorch.html"><span class="doc std std-doc">BERT4Rec on ML-1M in PyTorch</span></a>
+<a class="reference internal" href="T595874_BERT4Rec_on_ML25M_in_PyTorch_Lightning.html"><span class="doc std std-doc">BERT4Rec on ML-25M</span></a></p>
+</div>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 
