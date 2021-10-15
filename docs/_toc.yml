@@ -29,3 +29,23 @@ parts:
   - file: L850171_Taobao
   - file: L733018_Scribd
   - file: L192514_1mg
+- caption: Tutorials
+  chapters:
+  - file: T034923_BERT4Rec_on_ML_1m_in_PyTorch
+  - file: T595874_BERT4Rec_on_ML_25m_in_PyTorch_Lightning
+  - file: T881207_BST_on_ML_1m_in_PyTorch
+  - file: T602245_BST_in_PyTorch
+  - file: T088416_BST_in_MXNet
+  - file: T007665_BST_on_ML_1m_in_Keras
+  - file: T025247_BST_in_Deepctr
+  - file: T975104_SSE_PT_on_ML_1m_in_Tensorflow.x
+  - file: T225287_SASRec_on_ML_1m_in_PaddlePaddle
+  - file: T757997_SASRec_in_PyTorch
+  - file: T701627_SR_SAN_on_Yoochoose_and_Diginetica_in_PyTorch
+  - file: T472955_GC_SAN_in_PyTorch
+  - file: T161774_MATN_on_Yelp_in_Tensorflow
+  - file: T970274_Transformers4Rec_Session_based_Recommender_on_Yoochoose
+  - file: T382183_Transformers4Rec_XLNet_on_Synthetic_data_
+  - file: T793395_Transformers4Rec_session_based_recommender_on_REES46
+  - file: T512933_Language_Modeling_with_nn.Transformer_and_TorchText
+  - file: T904848_Transformer_from_scratch_in_PyTorch
