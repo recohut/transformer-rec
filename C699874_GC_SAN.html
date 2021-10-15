@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GeLU activation &#8212; transformer-rec</title>
+    <title>GC-SAN &#8212; transformer-rec</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -42,8 +42,6 @@
     <script src="_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -53,8 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="GRU4Rec" href="C889944_GRU4Rec.html" />
-    <link rel="prev" title="Stochastic shared embeddings" href="L137141_Stochastic_shared_embeddings.html" />
+    <link rel="next" title="SR-SAN" href="C306687_SR_SAN.html" />
+    <link rel="prev" title="MATN" href="C879945_MATN.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -95,7 +93,7 @@
   Concepts
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="L413721_Language_modeling_approaches.html">
    Language modeling approaches
@@ -116,8 +114,8 @@
    Stochastic shared embeddings
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L201302_GeLU_activation.html">
    GeLU activation
   </a>
  </li>
@@ -149,7 +147,7 @@
   Models
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="C065971_SASRec.html">
    SASRec
@@ -180,8 +178,8 @@
    MATN
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="C699874_GC_SAN.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    GC-SAN
   </a>
  </li>
@@ -231,7 +229,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/L201302_GeLU_activation.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/C699874_GC_SAN.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -256,7 +254,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/transformer-rec/main?urlpath=lab/tree/docs/L201302_GeLU_activation.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/transformer-rec/main?urlpath=lab/tree/docs/C699874_GC_SAN.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -264,7 +262,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/transformer-rec/blob/main/docs/L201302_GeLU_activation.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/transformer-rec/blob/main/docs/C699874_GC_SAN.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -281,6 +279,26 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#architecture">
+   Architecture
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#performance">
+     Performance
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -289,17 +307,20 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="gelu-activation">
-<h1>GeLU activation<a class="headerlink" href="#gelu-activation" title="Permalink to this headline">¶</a></h1>
-<p>The Gaussian Error Linear Unit (GELU) activation function was introduced in 2018 by UC Berkeley’s Dan Hendrycks and Kevin Gimpel from the Toyota Technological Institute at Chicago. An activation function is the “switch” that triggers neuron output, and its importance has grown as networks have deepened. In recent weeks a number of discussions in the machine learning community have brought GELU back into the spotlight.</p>
-<p>Early artificial neurons utilized binary threshold units. These hard binary decisions were smoothed with sigmoid activations, enabling a neuron to have a “firing rate” interpretation and to train with backpropagation. This made ReLU (Rectified Linear Units) the most popular activation function due to its feature of gating decisions based upon an input’s sign.</p>
-<p>Hendrycks and Gimpel proposed the non-linear activation function GELU, a formulation that relates to stochastic regularizers because it is a modified expectation of adaptive dropout, providing neuron output a higher probabilistic view.</p>
-<p>We can expand the cumulative distribution of N(0,1), i.e. Φ(x), as follows:</p>
-<div class="math notranslate nohighlight">
-\[\text{GELU}(x):=x{\Bbb P}(X \le x)=x\Phi(x)=0.5x\left(1+\text{erf}\left(\frac{x}{\sqrt{2}}\right)\right)\]</div>
-<p>Note that this is a <em>definition</em>, not an equation (or a relation). Authors have provided some justifications for this proposal, e.g. a stochastic <em>analogy</em>, however mathematically, this is just a definition.</p>
-<p><center><img src='_images/US780867_7.png'></p></center><p>Compared to ReLU or leaky ReLU, GELU has the theoretical advantage of being differentiable for all values of x, but has the in-practice disadvantage of being much, much more complex to compute.</p>
-<p>One can approximate the GELU with <span class="math notranslate nohighlight">\(0.5x\left(1+\tanh\left[\sqrt{2/\pi}\left(x + 0.044715x^{3}\right)\right]\right)\)</span> or <span class="math notranslate nohighlight">\(x\sigma\left(1.702x\right)\)</span>, but PyTorch’s exact implementation is sufficiently fast such that these approximations may be unnecessary.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="gc-san">
+<h1>GC-SAN<a class="headerlink" href="#gc-san" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Graph Contextualized Self-Attention Network for Session-based Recommendation.</p>
+</div></blockquote>
+<p>Session-based recommendation, which aims to predict the user’s immediate next action based on anonymous sessions, is a key task in many online services (e.g. e-commerce, media streaming). Recently, Self-Attention Network (SAN) has achieved significant success in various sequence modeling tasks without using either recurrent or convolutional network. However, SAN lacks local dependencies that exist over adjacent items and limits its capacity for learning contextualized representations of items in sequences. Graph contextualized self-attention model (GC-SAN) utilizes both graph neural network and self-attention mechanism, for session-based recommendation. In GC-SAN, we dynamically construct a graph structure for session sequences and capture rich local dependencies via graph neural network (GNN). Then each session learns long-range dependencies by applying the self-attention mechanism. Finally, each session is represented as a linear combination of the global preference and the current interest of that session.</p>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p><center><img src='_images/C699874_1.png'></p></center>
+<p>We first construct a directed graph of all session sequences. Based on the graph, we apply graph neural network to obtain all node vectors involved in the session graph. After that, we use a multi-layer self-attention network to capture long-range dependencies between items in the session. In prediction layer, we represent each session as a linear of the global preference and the current interest of that session. Finally, we compute the ranking scores of each candidate item for recommendation.</p>
+<div class="section" id="performance">
+<h3>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h3>
+<p><center><img src='_images/C699874_2.png'></p></center></div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -332,19 +353,19 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="L137141_Stochastic_shared_embeddings.html" title="previous page">
+        <a class="left-prev" href="C879945_MATN.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Stochastic shared embeddings</p>
+                <p class="prevnext-title">MATN</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="C889944_GRU4Rec.html" title="next page">
+        <a class="right-next" href="C306687_SR_SAN.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">GRU4Rec</p>
+                <p class="prevnext-title">SR-SAN</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
