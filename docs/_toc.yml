@@ -23,3 +23,9 @@ parts:
   - file: C879945_MATN
   - file: C699874_GC_SAN
   - file: C306687_SR_SAN
+- caption: Case studies
+  chapters:
+  - file: L109171_Santander
+  - file: L850171_Taobao
+  - file: L733018_Scribd
+  - file: L192514_1mg
