@@ -13,3 +13,7 @@ parts:
   - file: C889944_GRU4Rec
   - file: C505509_Caser
   - file: C001344_NARM
+- caption: Models
+  chapters:
+  - file: C065971_SASRec
+  - file: C759066_BERT4Rec
