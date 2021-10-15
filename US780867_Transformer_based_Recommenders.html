@@ -402,44 +402,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#concepts">
-   Concepts
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#baselines">
-   Baselines
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#models">
-   Models
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tools">
-   Tools
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#use-cases">
-   Use cases
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tutorials">
-   Tutorials
-  </a>
- </li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -460,35 +422,68 @@
 <p>Although the methods above achieved promising results and become the state-of-the-arts, the recurrent neural networks are hard to learn item dependencies from long distance. The graph neural networks based methods only aggregate the information from adjacent items where items are closely connected in the session graph. An attention based model have merge in the field of natural language processing, named the Transformer proposed by Vaswani et al.. It achieved excellent performance in the WMT 2014 English-to-French and English-to-German translation tasks. The key factor of its success is self-attention mechanism which allow the model capture the dependencies between encoder and decoder. However, the encoder-decoder architecture of the Transformer is not suit for session-based recommendation which output size is not equal to input size. Xu et al. apply self-attention layers after graph neural network to learn long-range dependencies among the output of graph neural network. However, the dependencies among all items may lost during the aggregation of adjacent items with the graph neural network. Adjacent items in a session graph may not be close in latent space, and vice versa. This may lead to inaccurate item embedding learning. The self-attention layer is directly applied after embedding layer to reserve the global item dependencies in SR-SAN.</p>
 <p>To deal with sequential and session-based recommendation, many sequence learning algorithms previously applied in machine learning and NLP research have been explored for RecSys, based on k-Nearest Neighbors, Frequent Pattern Mining, Hidden Markov Models, Recurrent Neural Networks, and more recently neural architectures using the Self-Attention Mechanism and the Transformer architectures.</p>
 <p>Much of the recent progress in sequential and session-based recommendation has been driven by improvements in model architecture and pre-training techniques originating in the field of Natural Language Processing. Transformer architectures in particular have facilitated building higher-capacity models and provided data augmentation and training techniques which demonstrably improve the effectiveness of sequential recommendation.</p>
-<div class="section" id="concepts">
-<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="baselines">
-<h2>Baselines<a class="headerlink" href="#baselines" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="models">
-<h2>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="tools">
-<h2>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="use-cases">
-<h2>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="tutorials">
-<h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
-<p><span class="xref myst"></span>
-<span class="xref myst"></span></p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="L413721_Language_modeling_approaches.html">Language modeling approaches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L270195_Attention_mechanism.html">Attention mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L879284_Transformers.html">Transformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L137141_Stochastic_shared_embeddings.html">Stochastic shared embeddings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L201302_GeLU_activation.html">GeLU activation</a></li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Baselines</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="C889944_GRU4Rec.html">GRU4Rec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C505509_Caser.html">Caser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C001344_NARM.html">NARM</a></li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Models</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="C065971_SASRec.html">SASRec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C759066_BERT4Rec.html">BERT4Rec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C220331_BST.html">BST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C655229_SSE_PT.html">SSE-PT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C776172_DMT.html">DMT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C879945_MATN.html">MATN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C699874_GC_SAN.html">GC-SAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C306687_SR_SAN.html">SR-SAN</a></li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Case studies</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="L109171_Santander.html">Santander</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L850171_Taobao.html">Taobao</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L733018_Scribd.html">Scribd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L192514_1mg.html">1mg</a></li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="T512933_Language_Modeling_with_nn.Transformer_and_TorchText.html">Language Modeling with nn.Transformer and TorchText</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T904848_Transformer_from_scratch_in_PyTorch.html">Transformer from scratch in PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T034923_BERT4Rec_on_ML_1m_in_PyTorch.html">BERT4Rec on ML-1m in PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T595874_BERT4Rec_on_ML_25m_in_PyTorch_Lightning.html">BERT4Rec on ML-25m in PyTorch Lightning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T881207_BST_on_ML_1m_in_PyTorch.html">BST on ML-1m in PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T602245_BST_in_PyTorch.html">BST in PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T088416_BST_in_MXNet.html">BST in MXNet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T007665_BST_on_ML_1m_in_Keras.html">BST on ML-1m in Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T025247_BST_in_Deepctr.html">BST in Deepctr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T975104_SSE_PT_on_ML_1m_in_Tensorflow.x.html">SSE-PT on ML-1m in Tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T225287_SASRec_on_ML_1m_in_PaddlePaddle.html">SASRec on ML-1m in PaddlePaddle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T757997_SASRec_in_PyTorch.html">SASRec in PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T701627_SR_SAN_on_Yoochoose_and_Diginetica_in_PyTorch.html">SR-SAN on Yoochoose and Diginetica in PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T472955_GC_SAN_in_PyTorch.html">GC-SAN in PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T161774_MATN_on_Yelp_in_Tensorflow.html">MATN on Yelp in Tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T970274_Transformers4Rec_Session_based_Recommender_on_Yoochoose.html">Transformers4Rec Session-based Recommender on Yoochoose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T382183_Transformers4Rec_XLNet_on_Synthetic_data_.html">Transformers4Rec XLNet on Synthetic data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T793395_Transformers4Rec_session_based_recommender_on_REES46.html">Transformers4Rec session-based recommender on REES46</a></li>
+</ul>
 </div>
 </div>
 
