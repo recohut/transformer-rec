@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SSE-PT &#8212; transformer-rec</title>
+    <title>MATN &#8212; transformer-rec</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -42,6 +42,8 @@
     <script src="_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -51,8 +53,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="DMT" href="C776172_DMT.html" />
-    <link rel="prev" title="BST" href="C220331_BST.html" />
+    <link rel="prev" title="DMT" href="C776172_DMT.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -163,8 +164,8 @@
    BST
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C655229_SSE_PT.html">
    SSE-PT
   </a>
  </li>
@@ -173,8 +174,8 @@
    DMT
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="C879945_MATN.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    MATN
   </a>
  </li>
@@ -219,7 +220,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/C655229_SSE_PT.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/C879945_MATN.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -244,7 +245,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/transformer-rec/main?urlpath=lab/tree/docs/C655229_SSE_PT.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/transformer-rec/main?urlpath=lab/tree/docs/C879945_MATN.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -252,7 +253,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/transformer-rec/blob/main/docs/C655229_SSE_PT.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/transformer-rec/blob/main/docs/C879945_MATN.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -275,18 +276,23 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-behavior-tensor-x">
+   Multi-Behavior Tensor X
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#architecture">
    Architecture
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#attention-illutration">
-   Attention illutration
+  <a class="reference internal nav-link" href="#algorithm">
+   Algorithm
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
+  <a class="reference internal nav-link" href="#performance">
+   Performance
   </a>
  </li>
 </ul>
@@ -300,30 +306,27 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="sse-pt">
-<h1>SSE-PT<a class="headerlink" href="#sse-pt" title="Permalink to this headline">¶</a></h1>
-<p>Temporal information is crucial for recommendation problems because user preferences are naturally dynamic in the real world. Recent advances in deep learning, especially the discovery of various attention mechanisms and newer architectures in addition to widely used RNN and CNN in natural language processing, have allowed for better use of the temporal ordering of items that each user has engaged with. In particular, the SASRec model, inspired by the popular Transformer model in natural languages processing, has achieved state-of-the-art results. However, SASRec, just like the original Transformer model, is inherently an un-personalized model and does not include personalized user embeddings. SSE-PT overcomes this limitation by employing a Personalized Transformer.</p>
-<p>Transformer-based methods has achieved state-of-the-art results in sequential recommendation problems and enjoyed more than 10x speed-up when compared to earlier CNN/RNN-based methods. However, these are standard transformer models which are mostly un-personalized. SASRec authors found that adding additional personalized embeddings did not improve the performance of their Transformer model, and postulate that the failure of adding personalization is due to the fact that they already use the user history and the user embeddings only contribute to overfitting. In this paper, authors propose a novel method, Personalized Transformer (SSEPT), that successfully introduces personalization into self-attentive neural network architectures.</p>
-<p>Introducing user embeddings into the standard transformer model is intrinsically difficult with existing regularization techniques, as unavoidably a large number of user parameters are introduced, which is often at the same scale of the number of training data. But this model shows that personalization can greatly improve ranking performance with a recent regularization technique called Stochastic Shared Embeddings (SSE).</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="matn">
+<h1>MATN<a class="headerlink" href="#matn" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Multiplex Behavioral Relation Learning for Recommendation via Memory Augmented Transformer Network.</p>
+</div></blockquote>
+<p>Capturing users’ precise preferences is of great importance in various recommender systems (eg., e-commerce platforms), which is the basis of how to present personalized interesting product lists to individual users. In spite of significant progress has been made to consider relations between users and items, most of the existing recommendation techniques solely focus on singular type of user-item interactions. However, user-item interactive behavior is often exhibited with multi-type (e.g., page view, add-to-favorite and purchase) and interdependent in nature. The overlook of multiplex behavior relations can hardly recognize the multi-modal contextual signals across different types of interactions, which limit the feasibility of current recommendation methods. To tackle the above challenge, this work proposes a Memory-Augmented Transformer Networks (MATN), to enable the recommendation with multiplex behavioral relational information, and joint modeling of type-specific behavioral context and type-wise behavior inter-dependencies, in a fully automatic manner. In MATN framework, we first develop a transformer-based multi-behavior relation encoder, to make the learned interaction representations be reflective of the cross-type behavior relations. Furthermore, a memory attention network is proposed to supercharge MATN capturing the contextual signals of different types of behavior into the category-specific latent embedding space. Finally, a cross-behavior aggregation component is introduced to promote the comprehensive collaboration across type-aware interaction behavior representations, and discriminate their inherent contributions in assisting recommendations.</p>
+<div class="section" id="multi-behavior-tensor-x">
+<h2>Multi-Behavior Tensor X<a class="headerlink" href="#multi-behavior-tensor-x" title="Permalink to this headline">¶</a></h2>
+<p>In tensor <span class="math notranslate nohighlight">\(\mathcal{X}\)</span>, each entry <span class="math notranslate nohighlight">\(\mathcal{x}_{𝑖,𝑗,𝑙}\)</span> = 1 if user <span class="math notranslate nohighlight">\(𝑢_𝑖\)</span> is interacted with item <span class="math notranslate nohighlight">\(𝑡_𝑗\)</span> given the 𝑙-th behavior type. For example, if user <span class="math notranslate nohighlight">\(𝑢_𝑖\)</span> purchases item <span class="math notranslate nohighlight">\(𝑡_𝑗\)</span> , the corresponding element <span class="math notranslate nohighlight">\(\mathcal{x}_{𝑖,𝑗,𝑙}\)</span> will be set as 1 in the purchase behavior matrix <span class="math notranslate nohighlight">\(\mathcal{X}_l\)</span>.</p>
+</div>
 <div class="section" id="architecture">
 <h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
-<figure><p><center><img src='_images/C655229_1.png'><figcaption>SSE-PT model architecture</figcaption></figure></p></center>
+<figure><p><center><img src='_images/C879945_1.png'><figcaption>The model architecture of the proposed MATN framework.</figcaption></figure></p></center>
 </div>
-<div class="section" id="attention-illutration">
-<h2>Attention illutration<a class="headerlink" href="#attention-illutration" title="Permalink to this headline">¶</a></h2>
-<figure><p><center><img src='_images/C655229_2.png'><figcaption>Illustration of how SASRec (Left) and SSE-PT (Right) differs on utilizing the Engagement History of A Random User in Movielens1M Dataset.</figcaption></figure></p></center></div>
-<div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p><a class="reference external" href="https://github.com/SSE-PT/SSE-PT">https://github.com/SSE-PT/SSE-PT</a></p></li>
-<li><p><a class="reference external" href="https://github.com/wuliwei9278/SSE-PT">https://github.com/wuliwei9278/SSE-PT</a></p></li>
-<li><p><a class="reference external" href="https://openreview.net/forum?id=HkeuD34KPH">https://openreview.net/forum?id=HkeuD34KPH</a></p></li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/1905.10630">https://arxiv.org/abs/1905.10630</a></p></li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/1908.05435">https://arxiv.org/abs/1908.05435</a></p></li>
-<li><p><a class="reference external" href="https://dl.acm.org/doi/abs/10.1145/3383313.3412258">https://dl.acm.org/doi/abs/10.1145/3383313.3412258</a></p></li>
-<li><p><a class="reference external" href="https://vimeo.com/455947093">https://vimeo.com/455947093</a></p></li>
-</ol>
+<div class="section" id="algorithm">
+<h2>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h2>
+<p><center><img src='_images/C879945_2.png'></p></center>
 </div>
+<div class="section" id="performance">
+<h2>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h2>
+<p><center><img src='_images/C879945_3.png'></p></center></div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -356,23 +359,14 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="C220331_BST.html" title="previous page">
+        <a class="left-prev" href="C776172_DMT.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">BST</p>
+                <p class="prevnext-title">DMT</p>
             </div>
         </a>
     </div>
-     <div id="next">
-        <a class="right-next" href="C776172_DMT.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">DMT</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
 
 </div>
         

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SSE-PT &#8212; transformer-rec</title>
+    <title>DMT &#8212; transformer-rec</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="DMT" href="C776172_DMT.html" />
-    <link rel="prev" title="BST" href="C220331_BST.html" />
+    <link rel="next" title="MATN" href="C879945_MATN.html" />
+    <link rel="prev" title="SSE-PT" href="C655229_SSE_PT.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -163,13 +163,13 @@
    BST
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C655229_SSE_PT.html">
    SSE-PT
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="C776172_DMT.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    DMT
   </a>
  </li>
@@ -219,7 +219,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/C655229_SSE_PT.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/C776172_DMT.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -244,7 +244,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/transformer-rec/main?urlpath=lab/tree/docs/C655229_SSE_PT.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/transformer-rec/main?urlpath=lab/tree/docs/C776172_DMT.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -252,7 +252,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/transformer-rec/blob/main/docs/C655229_SSE_PT.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/transformer-rec/blob/main/docs/C776172_DMT.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -278,11 +278,13 @@
   <a class="reference internal nav-link" href="#architecture">
    Architecture
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#attention-illutration">
-   Attention illutration
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#performance">
+     Performance
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
@@ -300,28 +302,24 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="sse-pt">
-<h1>SSE-PT<a class="headerlink" href="#sse-pt" title="Permalink to this headline">¶</a></h1>
-<p>Temporal information is crucial for recommendation problems because user preferences are naturally dynamic in the real world. Recent advances in deep learning, especially the discovery of various attention mechanisms and newer architectures in addition to widely used RNN and CNN in natural language processing, have allowed for better use of the temporal ordering of items that each user has engaged with. In particular, the SASRec model, inspired by the popular Transformer model in natural languages processing, has achieved state-of-the-art results. However, SASRec, just like the original Transformer model, is inherently an un-personalized model and does not include personalized user embeddings. SSE-PT overcomes this limitation by employing a Personalized Transformer.</p>
-<p>Transformer-based methods has achieved state-of-the-art results in sequential recommendation problems and enjoyed more than 10x speed-up when compared to earlier CNN/RNN-based methods. However, these are standard transformer models which are mostly un-personalized. SASRec authors found that adding additional personalized embeddings did not improve the performance of their Transformer model, and postulate that the failure of adding personalization is due to the fact that they already use the user history and the user embeddings only contribute to overfitting. In this paper, authors propose a novel method, Personalized Transformer (SSEPT), that successfully introduces personalization into self-attentive neural network architectures.</p>
-<p>Introducing user embeddings into the standard transformer model is intrinsically difficult with existing regularization techniques, as unavoidably a large number of user parameters are introduced, which is often at the same scale of the number of training data. But this model shows that personalization can greatly improve ranking performance with a recent regularization technique called Stochastic Shared Embeddings (SSE).</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="dmt">
+<h1>DMT<a class="headerlink" href="#dmt" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Deep Multifaceted Transformers for Multi-objective Ranking in Large-Scale E-commerce Recommender Systems.</p>
+</div></blockquote>
+<p>Recommender Systems have been playing essential roles in ecommerce portals. Existing recommendation algorithms usually learn the ranking scores of items by optimizing a single task (e.g., Click-through rate prediction) based on users’ historical click sequences, but they generally pay few attention to simultaneously modeling users’ multiple types of behaviors or jointly optimize multiple objectives (e.g., both Click-through rate and Conversion rate), which are both vital for e-commerce sites. In DMT (Deep Multifaceted Transformers for Multi-objective Ranking in Large-Scale E-commerce Recommender Systems), authors argued that it is crucial to formulate users’ different interests based on multiple types of behaviors and perform multi-task learning for significant improvement in multiple objectives simultaneously. DMT models users’ multiple types of behavior sequences simultaneously with multiple Transformers. It utilizes Multi-gate Mixture-of-Experts to optimize multiple objectives. Besides, it exploits unbiased learning to reduce the selection bias in the training data. Experiments on JD real production dataset demonstrate the effectiveness of DMT, which significantly outperforms state-of-the-art methods. DMT has been successfully deployed to serve the main traffic in the commercial Recommender System in <a class="reference external" href="http://jd.com/">JD.com</a>.</p>
 <div class="section" id="architecture">
 <h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
-<figure><p><center><img src='_images/C655229_1.png'><figcaption>SSE-PT model architecture</figcaption></figure></p></center>
+<p>It utilizes Deep Multifaceted Transformers (bottom), which is consisted of multiple Deep Interest Transformers (right), to extract users’ multifaceted interests from their diverse behavior sequences, exploits Multi-gate Mixture-of-Experts (MMoE) (top) to simultaneously optimize multiple objectives, and uses a Bias Deep Neural Network (left) to reduce the bias in training data.</p>
+<figure><p><center><img src='_images/C776172_1.png'><figcaption>DMT architecture</figcaption></figure></p></center><div class="section" id="performance">
+<h3>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h3>
+<p><center><img src='_images/C776172_2.png'></p></center></div>
 </div>
-<div class="section" id="attention-illutration">
-<h2>Attention illutration<a class="headerlink" href="#attention-illutration" title="Permalink to this headline">¶</a></h2>
-<figure><p><center><img src='_images/C655229_2.png'><figcaption>Illustration of how SASRec (Left) and SSE-PT (Right) differs on utilizing the Engagement History of A Random User in Movielens1M Dataset.</figcaption></figure></p></center></div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
-<li><p><a class="reference external" href="https://github.com/SSE-PT/SSE-PT">https://github.com/SSE-PT/SSE-PT</a></p></li>
-<li><p><a class="reference external" href="https://github.com/wuliwei9278/SSE-PT">https://github.com/wuliwei9278/SSE-PT</a></p></li>
-<li><p><a class="reference external" href="https://openreview.net/forum?id=HkeuD34KPH">https://openreview.net/forum?id=HkeuD34KPH</a></p></li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/1905.10630">https://arxiv.org/abs/1905.10630</a></p></li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/1908.05435">https://arxiv.org/abs/1908.05435</a></p></li>
-<li><p><a class="reference external" href="https://dl.acm.org/doi/abs/10.1145/3383313.3412258">https://dl.acm.org/doi/abs/10.1145/3383313.3412258</a></p></li>
-<li><p><a class="reference external" href="https://vimeo.com/455947093">https://vimeo.com/455947093</a></p></li>
+<li><p><a class="reference external" href="https://www.researchgate.net/profile/Yulong-Gu-5/publication/344752297_Deep_Multifaceted_Transformers_for_Multi-objective_Rank-ing_in_Large-Scale_E-commerce_Recommender_Systems/links/5f8dbf1f299bf1b53e32af1c/Deep-Multifaceted-Transformers-for-Multi-objective-Rank-ing-in-Large-Scale-E-commerce-Recommender-Systems.pdf">Paper on ResearchGate</a></p></li>
+<li><p><a class="reference external" href="https://github.com/guyulongcs/CIKM2020_DMT">Git Repo</a></p></li>
 </ol>
 </div>
 </div>
@@ -356,19 +354,19 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="C220331_BST.html" title="previous page">
+        <a class="left-prev" href="C655229_SSE_PT.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">BST</p>
+                <p class="prevnext-title">SSE-PT</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="C776172_DMT.html" title="next page">
+        <a class="right-next" href="C879945_MATN.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">DMT</p>
+                <p class="prevnext-title">MATN</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
