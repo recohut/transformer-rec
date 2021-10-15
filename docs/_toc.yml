@@ -21,3 +21,5 @@ parts:
   - file: C655229_SSE_PT
   - file: C776172_DMT
   - file: C879945_MATN
+  - file: C699874_GC_SAN
+  - file: C306687_SR_SAN
