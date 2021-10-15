@@ -25,7 +25,7 @@ jobs:
     - name: Building HTML site
       run: |
         jupyter-book build docs
-        mv docs/_images docs/_build/html
+        mv docs/_images/*.png docs/_build/html/_images
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
