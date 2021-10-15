@@ -19,3 +19,5 @@ parts:
   - file: C759066_BERT4Rec
   - file: C220331_BST
   - file: C655229_SSE_PT
+  - file: C776172_DMT
+  - file: C879945_MATN
