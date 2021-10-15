@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stochastic shared embeddings &#8212; transformer-rec</title>
+    <title>Caser &#8212; transformer-rec</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="GeLU activation" href="L201302_GeLU_activation.html" />
-    <link rel="prev" title="Transformers" href="L879284_Transformers.html" />
+    <link rel="next" title="NARM" href="C001344_NARM.html" />
+    <link rel="prev" title="GRU4Rec" href="C889944_GRU4Rec.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -93,7 +93,7 @@
   Concepts
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="L413721_Language_modeling_approaches.html">
    Language modeling approaches
@@ -109,8 +109,8 @@
    Transformers
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L137141_Stochastic_shared_embeddings.html">
    Stochastic shared embeddings
   </a>
  </li>
@@ -125,14 +125,14 @@
   Baselines
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="C889944_GRU4Rec.html">
    GRU4Rec
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="C505509_Caser.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Caser
   </a>
  </li>
@@ -182,7 +182,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/L137141_Stochastic_shared_embeddings.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/C505509_Caser.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -207,7 +207,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/transformer-rec/main?urlpath=lab/tree/docs/L137141_Stochastic_shared_embeddings.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/transformer-rec/main?urlpath=lab/tree/docs/C505509_Caser.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -215,7 +215,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/transformer-rec/blob/main/docs/L137141_Stochastic_shared_embeddings.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/transformer-rec/blob/main/docs/C505509_Caser.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -232,19 +232,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -253,16 +240,11 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="stochastic-shared-embeddings">
-<h1>Stochastic shared embeddings<a class="headerlink" href="#stochastic-shared-embeddings" title="Permalink to this headline">¶</a></h1>
-<p><em>In deep neural nets, lower level embedding layers account for a large portion of the total number of parameters. Tikhonov regularization, graph-based regularization, and hard parameter sharing are approaches that introduce explicit biases into training in a hope to reduce statistical complexity. Alternatively, we propose stochastically shared embeddings (SSE), a data-driven approach to regularizing embedding layers, which stochastically transitions between embeddings during stochastic gradient descent (SGD). Because SSE integrates seamlessly with existing SGD algorithms, it can be used with only minor modifications when training large scale neural networks. We develop two versions of SSE: SSE-Graph using knowledge graphs of embeddings; SSE-SE using no prior information. We provide theoretical guarantees for our method and show its empirical effectiveness on 6 distinct tasks, from simple neural networks with one hidden layer in recommender systems, to the transformer and BERT in natural languages. We find that when used along with widely-used regularization methods such as weight decay and dropout, our proposed SSE can further reduce overfitting, which often leads to more favorable generalization results.</em></p>
-<div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p><a class="reference external" href="https://arxiv.org/abs/1905.10630">Liwei Wu, Shuqing Li, Cho-Jui Hsieh, James Sharpnack. arXiv. 2019. Stochastic Shared Embeddings: Data-driven Regularization of Embedding Layers.</a></p></li>
-</ol>
-</div>
-</div>
+  <div class="tex2jax_ignore mathjax_ignore section" id="caser">
+<h1>Caser<a class="headerlink" href="#caser" title="Permalink to this headline">¶</a></h1>
+<p>Top-N sequential recommendation models each user as a sequence of items interacted in the past and aims to predict top-N ranked items that a user will likely interact in a ‘near future’. The order of interaction implies that sequential patterns play an important role where more recent items in a sequence have a larger impact on the next item. Convolutional Sequence Embedding Recommendation Model (Caser) address this requirement by embedding a sequence of recent items into an image’ in the time and latent spaces and learn sequential patterns as local features of the image using convolutional filters. This approach provides a unified and flexible network structure for capturing both general preferences and sequential patterns.</p>
+<p>In other words, Caser adopts convolutional neural networks capture the dynamic pattern influences of users’ recent activities. The main component of Caser consists of a horizontal convolutional network and a vertical convolutional network, aiming to uncover the union-level and point-level sequence patterns, respectively. Point-level pattern indicates the impact of single item in the historical sequence on the target item, while union level pattern implies the influences of several previous actions on the subsequent target. For example, buying both milk and butter together leads to higher probability of buying flour than just buying one of them. Moreover, users’ general interests, or long term preferences are also modeled in the last fully-connected layers, resulting in a more comprehensive modeling of user interests.</p>
+<p><center><img src='_images/C505509_1.png'></center></p></div>
 
     <script type="text/x-thebe-config">
     {
@@ -294,19 +276,19 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="L879284_Transformers.html" title="previous page">
+        <a class="left-prev" href="C889944_GRU4Rec.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Transformers</p>
+                <p class="prevnext-title">GRU4Rec</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="L201302_GeLU_activation.html" title="next page">
+        <a class="right-next" href="C001344_NARM.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">GeLU activation</p>
+                <p class="prevnext-title">NARM</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
