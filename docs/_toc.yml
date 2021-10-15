@@ -8,3 +8,8 @@ parts:
   - file: L879284_Transformers
   - file: L137141_Stochastic_shared_embeddings
   - file: L201302_GeLU_activation
+- caption: Baselines
+  chapters:
+  - file: C889944_GRU4Rec
+  - file: C505509_Caser
+  - file: C001344_NARM
