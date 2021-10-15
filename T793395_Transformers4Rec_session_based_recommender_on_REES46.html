@@ -51,7 +51,6 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Language Modeling with nn.Transformer and TorchText" href="T512933_Language_Modeling_with_nn.Transformer_and_TorchText.html" />
     <link rel="prev" title="Transformers4Rec XLNet on Synthetic data" href="T382183_Transformers4Rec_XLNet_on_Synthetic_data_.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -223,6 +222,16 @@
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="T512933_Language_Modeling_with_nn.Transformer_and_TorchText.html">
+   Language Modeling with nn.Transformer and TorchText
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T904848_Transformer_from_scratch_in_PyTorch.html">
+   Transformer from scratch in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="T034923_BERT4Rec_on_ML_1m_in_PyTorch.html">
    BERT4Rec on ML-1m in PyTorch
   </a>
@@ -300,16 +309,6 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Transformers4Rec session-based recommender on REES46
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="T512933_Language_Modeling_with_nn.Transformer_and_TorchText.html">
-   Language Modeling with nn.Transformer and TorchText
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="T904848_Transformer_from_scratch_in_PyTorch.html">
-   Transformer from scratch in PyTorch
   </a>
  </li>
 </ul>
@@ -2215,13 +2214,12 @@ been proposed to model the sequence of interactions within the current user sess
 </ul>
 <p>You can check the <a class="reference external" href="https://nvidia-merlin.github.io/Transformers4Rec/main/index.html">full documentation</a> of Transformers4Rec if needed.</p>
 <p>In the following Figure, we present a reference architecture that we are going to build with Transformers4Rec PyTorch API in this section. We are going to start using only <code class="docutils literal notranslate"><span class="pre">product-id</span></code> as input feature, but as you can notice in the figure, we can add additional categorical and numerical features later to improve recommendation accuracy.</p>
-<img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/360a24b7-5d3f-41bc-bafc-e6f7a50b8a90/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211011%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211011T112731Z&X-Amz-Expires=86400&X-Amz-Signature=2127778c75a954ad2b20a01cbb06aa9774a935b18af8875d784d0250dc999f93&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22'>
-<p><center>Figure 1. Transformers4Rec meta-architecture.</center></p></div>
+<p><center><figure><img src='https://github.com/sparsh-ai/transformer-rec/blob/main/docs/_images/T793395_1.png?raw=1'><figcaption>Figure 1. Transformers4Rec meta-architecture.</figcaption></figure></center></p></div>
 <div class="section" id="training-an-rnn-based-session-based-recommendation-model">
 <h2>Training an RNN-based Session-based Recommendation Model<a class="headerlink" href="#training-an-rnn-based-session-based-recommendation-model" title="Permalink to this headline">¶</a></h2>
 <p>In this section, we use a type of Recurrent Neural Networks (RNN) - the Gated Recurrent Unit (GRU)[5] - to do next-item prediction using a sequence of events (e.g., click, view, or purchase) per user in a given session. There is obviously some sequential patterns that we want to capture to provide more relevant recommendations. In our case, the input of the GRU layer is a representation of the user interaction, the internal GRU hidden state encodes a representation of the session based on past interactions and the outputs are the next-item predictions. Basically, for each item in a given session, we generate the output as the predicted preference of the items, i.e. the likelihood of being the next.</p>
 <p>Figure 2 illustrates the logic of predicting next item in a given session. First, the product ids are embedded and fed as a sequence to a GRU layer, which outputs a representation than can be used to predict the next item. For the sake of simplicity, we treat the recommendation as a multi-class classification problem and use cross-entropy loss. In our first example, we use a GRU block instead of <code class="docutils literal notranslate"><span class="pre">Transformer</span> <span class="pre">block</span></code> (shown in the Figure 1).</p>
-<p><center><img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/72275c7e-3e6c-4399-adb0-406c1bd36863/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211011%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211011T112939Z&X-Amz-Expires=86400&X-Amz-Signature=19668197b543d096cd1b1e9ed1579dfca46c9329d70edd4b4b937902209ef0e4&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22'><br>Figure 2. Next item prediction with RNN.</center></p><div class="section" id="instantiates-schema-object-from-a-schema-file">
+<p><center><figure><img src='https://github.com/sparsh-ai/transformer-rec/blob/main/docs/_images/T793395_2.png?raw=1'><figcaption>Figure 2. Next item prediction with RNN.</figcaption></figure></center></p><div class="section" id="instantiates-schema-object-from-a-schema-file">
 <h3>Instantiates Schema object from a <code class="docutils literal notranslate"><span class="pre">schema</span></code> file.<a class="headerlink" href="#instantiates-schema-object-from-a-schema-file" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2762,14 +2760,14 @@ retrieval metrics are used to compute the Top-20 accuracy of recommendation list
 <li><p>Self-attention mechanisms: Transformers rely entirely on self-attention mechanisms that directly model relationships between all item-ids in a sequence.</p></li>
 <li><p>Positional encodings: A representation of the location or “position” of items in a sequence which is used to give the order context to the model architecture.</p></li>
 </ul>
-<p><center><img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5a89728b-f767-43f9-a04b-249ac5148c2a/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211011%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211011T113310Z&X-Amz-Expires=86400&X-Amz-Signature=ae0e7ad7c947f6e916c5e809d2779079c81ebd16d9dc2eca17604c5fcca04d02&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22'><br>Figure 3. Transformer vs vanilla RNN.</center></p><p>Figure 4 illustrates the differences of Transformer (self-attention based) and a vanilla RNN architecture. As we see, RNN cannot be parallelized because it uses sequential processing over time (notice the sequential path from previous cells to the current one). On the other hand, the Transformer is a more powerful architecture because the self-attention mechanism is capable of representing dependencies within the sequence of tokens, favors parallel processing and handle longer sequences.</p>
+<p><center><figure><img src='https://github.com/sparsh-ai/transformer-rec/blob/main/docs/_images/T793395_3.png?raw=1'><figcaption>Figure 3. Transformer vs vanilla RNN.</figcaption></figure></center></p><p>Figure 4 illustrates the differences of Transformer (self-attention based) and a vanilla RNN architecture. As we see, RNN cannot be parallelized because it uses sequential processing over time (notice the sequential path from previous cells to the current one). On the other hand, the Transformer is a more powerful architecture because the self-attention mechanism is capable of representing dependencies within the sequence of tokens, favors parallel processing and handle longer sequences.</p>
 <p>As illustrated in the <a class="reference external" href="https://arxiv.org/pdf/1706.03762.pdf">Attention is All You Need</a> paper, the original transformer model is made up of an encoder and decoder where each is a stack we can call a transformer block. In Transformers4Rec architectures we use the encoder block of transformer architecture.</p>
-<p><center><img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/f0b9e980-ad4e-452b-8936-68fbac8fccd7/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211011%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211011T113407Z&X-Amz-Expires=86400&X-Amz-Signature=263317ed25284a919e276c6d552bc032ab9100106730663b6d2d8dc5fcc77c95&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22'><br>Figure 4. Encoder block of the Transformer Architecture.</center></p></div>
+<p><center><figure><img src='https://github.com/sparsh-ai/transformer-rec/blob/main/docs/_images/T793395_4.png?raw=1'><figcaption>Figure 4. Encoder block of the Transformer Architecture.</figcaption></figure></center></p></div>
 <div class="section" id="xlnet">
 <h3>XLNet<a class="headerlink" href="#xlnet" title="Permalink to this headline">¶</a></h3>
 <p>Here, we use XLNet [10] as the Transformer block in our architecture. It was originally proposed to be trained with the <em>Permutation Language Modeling (PLM)</em>  technique, that combines the advantages of autoregressive (Causal LM) and autoencoding (Masked LM). Although, we found out in our <a class="reference external" href="https://github.com/NVIDIA-Merlin/publications/blob/main/2021_acm_recsys_transformers4rec/recsys21_transformers4rec_paper.pdf">paper</a> [8] that the <em>Masked Language Model (MLM)</em> approach worked better than PLM for the small sequences in session-based recommendation, thus we use MLM for this example. MLM was introduced in <em>BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</em> paper [8].</p>
 <p>Figure 5 illustrates the causal language modeling (LM) and masked LM. In this example, we use in causal LM for RNN masked LM for XLNet. Causal LM is the task of predicting the token following a sequence of tokens, where the model only attends to the left context, i.e. models the probability of a token given the previous tokens in a sentence [7]. On the other hand, the MLM randomly masks some of the tokens from the input sequence, and the objective is to predict the original vocabulary id of the masked word based only on its bi-directional context. When we train with MLM, the Transformer layer is also allowed to use positions on the right (future information) during training. During inference, all past items are visible for the Transformer layer, which tries to predict the next item. It performs a type of data augmentation, by masking different positions of the sequences in each training epoch.</p>
-<p><center><img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/35f985e3-b874-4aba-9420-7ee6fa0b8e7e/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211011%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211011T113457Z&X-Amz-Expires=86400&X-Amz-Signature=4e1a1639f829054317666ff74fc10dbff4411c150405bec184f5b3cbd2127977&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22'><br>Figure 5. Causal and Masked Language Model masking methods.</center></p></div>
+<p><center><figure><img src='https://github.com/sparsh-ai/transformer-rec/blob/main/docs/_images/T793395_5.png?raw=1'><figcaption>Figure 5. Causal and Masked Language Model masking methods.</figcaption></figure></center></p></div>
 <div class="section" id="train-xlnet-for-next-item-prediction">
 <h3>Train XLNET for Next Item Prediction<a class="headerlink" href="#train-xlnet-for-next-item-prediction" title="Permalink to this headline">¶</a></h3>
 <p>Now we are going to define an architecture for next-item prediction using the XLNET architecture.</p>
@@ -3714,7 +3712,7 @@ next-item/recall_at_20:0.2324143350124359
 <h2>Triton for Recommender Systems<a class="headerlink" href="#triton-for-recommender-systems" title="Permalink to this headline">¶</a></h2>
 <p>NVIDIA <a class="reference external" href="https://github.com/triton-inference-server/server">Triton Inference Server (TIS)</a> simplifies the deployment of AI models at scale in production. The Triton Inference Server allows us to deploy and serve our model for inference. It supports a number of different machine learning frameworks such as TensorFlow and PyTorch.</p>
 <p>The last step of machine learning (ML)/deep learning (DL) pipeline is to deploy the ETL workflow and saved model to production. In the production setting, we want to transform the input data as done during training (ETL). We need to apply the same mean/std for continuous features and use the same categorical mapping to convert the categories to continuous integer before we use the DL model for a prediction. Therefore, we deploy the NVTabular workflow with the PyTorch model as an ensemble model to Triton Inference. The ensemble model guarantees that the same transformation is applied to the raw inputs.</p>
-<img src='https://s3.us-west-2.amazonaws.com/secure.notion-static.com/55f95680-f556-45b4-93b3-a3f5eaf715f7/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211011%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211011T114013Z&X-Amz-Expires=86400&X-Amz-Signature=3229c6eb93dda4a077bae72a876dcaa5da46602d1cdc28193ae42c540ff67944&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22'><p><strong>Objectives:</strong></p>
+<p><center><img src='https://github.com/sparsh-ai/transformer-rec/blob/main/docs/_images/T793395_6.png?raw=1'></center></p><p><strong>Objectives:</strong></p>
 <p>Learn how to deploy a model to Triton</p>
 <ol class="simple">
 <li><p>Deploy saved NVTabular and PyTorch models to Triton Inference Server</p></li>
@@ -4171,15 +4169,6 @@ Loaded model &#39;t4r_pytorch_pt&#39;
             </div>
         </a>
     </div>
-     <div id="next">
-        <a class="right-next" href="T512933_Language_Modeling_with_nn.Transformer_and_TorchText.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Language Modeling with nn.Transformer and TorchText</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
 
 </div>
         

@@ -223,6 +223,16 @@
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="T512933_Language_Modeling_with_nn.Transformer_and_TorchText.html">
+   Language Modeling with nn.Transformer and TorchText
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T904848_Transformer_from_scratch_in_PyTorch.html">
+   Transformer from scratch in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="T034923_BERT4Rec_on_ML_1m_in_PyTorch.html">
    BERT4Rec on ML-1m in PyTorch
   </a>
@@ -300,16 +310,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="T793395_Transformers4Rec_session_based_recommender_on_REES46.html">
    Transformers4Rec session-based recommender on REES46
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="T512933_Language_Modeling_with_nn.Transformer_and_TorchText.html">
-   Language Modeling with nn.Transformer and TorchText
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="T904848_Transformer_from_scratch_in_PyTorch.html">
-   Transformer from scratch in PyTorch
   </a>
  </li>
 </ul>
@@ -432,9 +432,8 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="gc-san-in-pytorch">
 <h1>GC-SAN in PyTorch<a class="headerlink" href="#gc-san-in-pytorch" title="Permalink to this headline">¶</a></h1>
 <p>Session-based recommendation, which aims to predict the user’s immediate next action based on anonymous sessions, is a key task in many online services (e.g. e-commerce, media streaming). Recently, Self-Attention Network (SAN) has achieved significant success in various sequence modeling tasks without using either recurrent or convolutional network. However, SAN lacks local dependencies that exist over adjacent items and limits its capacity for learning contextualized representations of items in sequences. In this paper, we propose a graph contextualized self-attention model (GC-SAN), which utilizes both graph neural network and self-attention mechanism, for session-based recommendation. In GC-SAN, we dynamically construct a graph structure for session sequences and capture rich local dependencies via graph neural network (GNN). Then each session learns long-range dependencies by applying the self-attention mechanism. Finally, each session is represented as a linear combination of the global preference and the current interest of that session. Extensive experiments on two real-world datasets show that GC-SAN outperforms state-of-the-art methods consistently.</p>
-<img src='_images/T472955_i1.png'>
 <p>The general architecture of the proposed model. We first construct a directed graph of all session sequences. Based on the graph, we apply graph neural network to obtain all node vectors involved in the session graph. After that, we use a multi-layer self-attention network to capture long-range dependencies between items in the session. In prediction layer, we represent each session as a linear of the global preference and the current interest of that session. Finally, we compute the ranking scores of each candidate item for recommendation.</p>
-<img src='_images/T472955_i2.png'><div class="section" id="imports">
+<div class="section" id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

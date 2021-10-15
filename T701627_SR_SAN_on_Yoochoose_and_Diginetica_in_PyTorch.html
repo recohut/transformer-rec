@@ -225,6 +225,16 @@
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="T512933_Language_Modeling_with_nn.Transformer_and_TorchText.html">
+   Language Modeling with nn.Transformer and TorchText
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T904848_Transformer_from_scratch_in_PyTorch.html">
+   Transformer from scratch in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="T034923_BERT4Rec_on_ML_1m_in_PyTorch.html">
    BERT4Rec on ML-1m in PyTorch
   </a>
@@ -302,16 +312,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="T793395_Transformers4Rec_session_based_recommender_on_REES46.html">
    Transformers4Rec session-based recommender on REES46
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="T512933_Language_Modeling_with_nn.Transformer_and_TorchText.html">
-   Language Modeling with nn.Transformer and TorchText
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="T904848_Transformer_from_scratch_in_PyTorch.html">
-   Transformer from scratch in PyTorch
   </a>
  </li>
 </ul>
@@ -475,11 +475,9 @@
 <p>Session-based recommendation aims to predict user’s next behavior from current session and previous anonymous sessions. Capturing long-range dependencies between items is a vital challenge in session-based recommendation. A novel approach is proposed for session-based recommendation with self-attention networks (SR-SAN) as a remedy. The self-attention networks (SAN) allow SR-SAN capture the global dependencies among all items of a session regardless of their distance. In SR-SAN, a single item latent vector is used to capture both current interest and global interest instead of session embedding which is composed of current interest embedding and global interest embedding. Some experiments have been performed on some open benchmark datasets. Experimental results show that the proposed method outperforms some state-of-the-arts by comparisons.</p>
 <p>Firstly, a self-attention based model which captures and reserves the full dependencies among all items regardless of their distance is proposed without using RNNs or GNNs. Secondly, to generate session-based recommendations, the proposed method use a single item latent vector which jointly represents current interest and global interest instead of session embedding which is composed of current interest embedding and global interest embedding. In RNNs or GNNs based methods, the global interest embedding usually obtained by aggregating all items in the session with attention mechanism which is based on current interest embedding. However, this is redundant in SR-SAN which last item embedding is aggregating all items in the session with self-attention mechanism. In this way, the last item embedding in session can jointly represent current interest and global interest.</p>
 <p>It utilizes the self-attention to learn global item dependencies. The multi-head attention mechanism is adopted to allow SR-SAN focus on different important part of the session. The latent vector of the last item in the session is used to jointly represents current interest and global interest with prediction layer.</p>
-<img src='_images/T701627_i1.png'>
 <p>Session-based recommender system makes prediction based upon current user sessions data without accessing to the long-term preference profile. Let <span class="math notranslate nohighlight">\(V = \{v_1, v_2, . . ., v_{|V|}\}\)</span> denote the set consisting of all unique items involved in all the sessions. An anonymous session sequence <span class="math notranslate nohighlight">\(S\)</span> can be represented by a list <span class="math notranslate nohighlight">\(S = [s_1, s_2, . . ., s_n]\)</span>, where <span class="math notranslate nohighlight">\(s_i ∈ V\)</span> represents a clicked item of the user within the session <span class="math notranslate nohighlight">\(S\)</span>. The task of session-based recommendation is to predict the next click <span class="math notranslate nohighlight">\(s_{n+1}\)</span> for session <span class="math notranslate nohighlight">\(S\)</span>. Our models are constructed and trained as a classifier that learns to generate a score for each of the candidates in <span class="math notranslate nohighlight">\(V\)</span>. Let <span class="math notranslate nohighlight">\(\hat{y} = \{\hat{y}_1, \hat{y}_2, . . ., \hat{y}_{|V|}\}\)</span> denote the output score vector, where <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> corresponds to the score of item <span class="math notranslate nohighlight">\(v_i\)</span>. The items with top-K values in <span class="math notranslate nohighlight">\(\hat{y}\)</span> will be the candidate items for recommendation.</p>
 <p>The proposed model is made up of two parts. The first part is obtaining item latent vectors with self-attention networks, the second part of the proposed model is making recommendation with prediction layer.</p>
-<p><strong>Comparisons with Some Baseline Methods</strong></p>
-<img src='_images/T701627_i2.png' width=50%><div class="section" id="setup">
+<div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="installations">
 <h3>Installations<a class="headerlink" href="#installations" title="Permalink to this headline">¶</a></h3>
