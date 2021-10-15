@@ -1,0 +1,1282 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BST in MXNet &#8212; transformer-rec</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="BST on ML-1m in Keras" href="T007665_BST_on_ML_1m_in_Keras.html" />
+    <link rel="prev" title="BST in PyTorch" href="T602245_BST_in_PyTorch.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">transformer-rec</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="US780867_Transformer_based_Recommenders.html">
+   Transformer-based Recommenders
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L413721_Language_modeling_approaches.html">
+   Language modeling approaches
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L270195_Attention_mechanism.html">
+   Attention mechanism
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L879284_Transformers.html">
+   Transformers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L137141_Stochastic_shared_embeddings.html">
+   Stochastic shared embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L201302_GeLU_activation.html">
+   GeLU activation
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Baselines
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C889944_GRU4Rec.html">
+   GRU4Rec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C505509_Caser.html">
+   Caser
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C001344_NARM.html">
+   NARM
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C065971_SASRec.html">
+   SASRec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C759066_BERT4Rec.html">
+   BERT4Rec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C220331_BST.html">
+   BST
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C655229_SSE_PT.html">
+   SSE-PT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C776172_DMT.html">
+   DMT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C879945_MATN.html">
+   MATN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C699874_GC_SAN.html">
+   GC-SAN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C306687_SR_SAN.html">
+   SR-SAN
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Case studies
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L109171_Santander.html">
+   Santander
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L850171_Taobao.html">
+   Taobao
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L733018_Scribd.html">
+   Scribd
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L192514_1mg.html">
+   1mg
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="T034923_BERT4Rec_on_ML_1m_in_PyTorch.html">
+   BERT4Rec on ML-1m in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T595874_BERT4Rec_on_ML_25m_in_PyTorch_Lightning.html">
+   BERT4Rec on ML-25m in PyTorch Lightning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T881207_BST_on_ML_1m_in_PyTorch.html">
+   BST on ML-1m in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T602245_BST_in_PyTorch.html">
+   BST in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   BST in MXNet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T007665_BST_on_ML_1m_in_Keras.html">
+   BST on ML-1m in Keras
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T025247_BST_in_Deepctr.html">
+   BST in Deepctr
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T975104_SSE_PT_on_ML_1m_in_Tensorflow.x.html">
+   SSE-PT on ML-1m in Tensorflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T225287_SASRec_on_ML_1m_in_PaddlePaddle.html">
+   SASRec on ML-1m in PaddlePaddle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T757997_SASRec_in_PyTorch.html">
+   SASRec in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T701627_SR_SAN_on_Yoochoose_and_Diginetica_in_PyTorch.html">
+   SR-SAN on Yoochoose and Diginetica in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T472955_GC_SAN_in_PyTorch.html">
+   GC-SAN in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T161774_MATN_on_Yelp_in_Tensorflow.html">
+   MATN on Yelp in Tensorflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T970274_Transformers4Rec_Session_based_Recommender_on_Yoochoose.html">
+   Transformers4Rec Session-based Recommender on Yoochoose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T382183_Transformers4Rec_XLNet_on_Synthetic_data_.html">
+   Transformers4Rec XLNet on Synthetic data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T793395_Transformers4Rec_session_based_recommender_on_REES46.html">
+   Transformers4Rec session-based recommender on REES46
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T512933_Language_Modeling_with_nn.Transformer_and_TorchText.html">
+   Language Modeling with nn.Transformer and TorchText
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T904848_Transformer_from_scratch_in_PyTorch.html">
+   Transformer from scratch in PyTorch
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/T088416_BST_in_MXNet.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/transformer-rec/main?urlpath=lab/tree/docs/T088416_BST_in_MXNet.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/transformer-rec/blob/main/docs/T088416_BST_in_MXNet.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#installations">
+     Installations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imports">
+     Imports
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#params">
+     Params
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model">
+   Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train">
+   Train
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#test">
+   Test
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="bst-in-mxnet">
+<h1>BST in MXNet<a class="headerlink" href="#bst-in-mxnet" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Implementing BST transformer model in MXNet library framework. After implementation, running on a sample dataset.</p>
+</div></blockquote>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installations">
+<h3>Installations<a class="headerlink" href="#installations" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install -q mxnet
+!pip install -q gluonnlp
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="imports">
+<h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">mxnet</span> <span class="k">as</span> <span class="nn">mx</span>
+<span class="kn">from</span> <span class="nn">mxnet</span> <span class="kn">import</span> <span class="n">gluon</span>
+<span class="kn">from</span> <span class="nn">mxnet.gluon</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">mxnet</span> <span class="kn">import</span> <span class="n">autograd</span> <span class="k">as</span> <span class="n">ag</span>
+<span class="kn">from</span> <span class="nn">mxnet.gluon.nn</span> <span class="kn">import</span> <span class="n">HybridBlock</span><span class="p">,</span> <span class="n">HybridSequential</span><span class="p">,</span> <span class="n">LeakyReLU</span>
+<span class="kn">from</span> <span class="nn">mxnet.gluon.block</span> <span class="kn">import</span> <span class="n">HybridBlock</span>
+<span class="kn">from</span> <span class="nn">mxnet.ndarray</span> <span class="kn">import</span> <span class="n">L2Normalization</span>
+<span class="kn">from</span> <span class="nn">gluonnlp.model</span> <span class="kn">import</span> <span class="n">AttentionCell</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="params">
+<h3>Params<a class="headerlink" href="#params" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ctx</span> <span class="o">=</span> <span class="n">mx</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+<span class="n">mx</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_BATCH</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">_SEQ_LEN</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">_OTHER_LEN</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">_EMB_DIM</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">_NUM_HEADS</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">_DROP</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">_UNITS</span> <span class="o">=</span> <span class="mi">32</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_masked_softmax</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">att_score</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">dtype</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Ignore the masked elements when calculating the softmax</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F : symbol or ndarray</span>
+<span class="sd">    att_score : Symborl or NDArray</span>
+<span class="sd">        Shape (batch_size, query_length, memory_length)</span>
+<span class="sd">    mask : Symbol or NDArray or None</span>
+<span class="sd">        Shape (batch_size, query_length, memory_length)</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    att_weights : Symborl or NDArray</span>
+<span class="sd">        Shape (batch_size, query_length, memory_length)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Fill in the masked scores with a very small value</span>
+        <span class="n">neg</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1e18</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">:</span>
+            <span class="n">neg</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1e4</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># if AMP (automatic mixed precision) is enabled, -1e18 will cause NaN.</span>
+                <span class="kn">from</span> <span class="nn">mxnet.contrib</span> <span class="kn">import</span> <span class="n">amp</span>
+                <span class="k">if</span> <span class="n">amp</span><span class="o">.</span><span class="n">amp</span><span class="o">.</span><span class="n">_amp_initialized</span><span class="p">:</span>
+                    <span class="n">neg</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1e4</span>
+            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="n">att_score</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">att_score</span><span class="p">,</span> <span class="n">neg</span> <span class="o">*</span> <span class="n">F</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">att_score</span><span class="p">))</span>
+        <span class="n">att_weights</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">att_score</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">mask</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">att_weights</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">att_score</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">att_weights</span>
+
+<span class="k">def</span> <span class="nf">_get_attention_cell</span><span class="p">(</span><span class="n">attention_cell</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">scaled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_heads</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    attention_cell : AttentionCell or str</span>
+<span class="sd">    units : int or None</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    attention_cell : AttentionCell</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attention_cell</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">attention_cell</span> <span class="o">==</span> <span class="s1">&#39;scaled_luong&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">DotProductAttentionCell</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span> <span class="n">scaled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                           <span class="n">use_bias</span><span class="o">=</span><span class="n">use_bias</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span> <span class="n">luong_style</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">attention_cell</span> <span class="o">==</span> <span class="s1">&#39;scaled_dot&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">DotProductAttentionCell</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span> <span class="n">scaled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                           <span class="n">use_bias</span><span class="o">=</span><span class="n">use_bias</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span> <span class="n">luong_style</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">attention_cell</span> <span class="o">==</span> <span class="s1">&#39;dot&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">DotProductAttentionCell</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span> <span class="n">scaled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                           <span class="n">use_bias</span><span class="o">=</span><span class="n">use_bias</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span> <span class="n">luong_style</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">attention_cell</span> <span class="o">==</span> <span class="s1">&#39;cosine&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">DotProductAttentionCell</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span> <span class="n">scaled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="n">use_bias</span><span class="p">,</span>
+                                           <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span> <span class="n">normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># elif attention_cell == &#39;mlp&#39;:</span>
+        <span class="c1">#     return MLPAttentionCell(units=units, normalized=False)</span>
+        <span class="c1"># elif attention_cell == &#39;normed_mlp&#39;:</span>
+        <span class="c1">#     return MLPAttentionCell(units=units, normalized=True)</span>
+        <span class="k">elif</span> <span class="n">attention_cell</span> <span class="o">==</span> <span class="s1">&#39;multi_head&#39;</span><span class="p">:</span>
+            <span class="n">base_cell</span> <span class="o">=</span> <span class="n">DotProductAttentionCell</span><span class="p">(</span><span class="n">scaled</span><span class="o">=</span><span class="n">scaled</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">activation</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">MultiHeadAttentionCell</span><span class="p">(</span><span class="n">base_cell</span><span class="o">=</span><span class="n">base_cell</span><span class="p">,</span> <span class="n">query_units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="n">use_bias</span><span class="p">,</span>
+                                          <span class="n">key_units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span> <span class="n">value_units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span> <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span>
+                                          <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attention_cell</span><span class="p">,</span> <span class="n">AttentionCell</span><span class="p">),</span>\
+            <span class="s1">&#39;attention_cell must be either string or AttentionCell. Received attention_cell=</span><span class="si">{}</span><span class="s1">&#39;</span>\
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attention_cell</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">attention_cell</span>
+
+<span class="k">class</span> <span class="nc">DotProductAttentionCell</span><span class="p">(</span><span class="n">AttentionCell</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Dot product attention between the query and the key.</span>
+<span class="sd">    Depending on parameters, defined as::</span>
+<span class="sd">        units is None:</span>
+<span class="sd">            score = &lt;h_q, h_k&gt;</span>
+<span class="sd">        units is not None and luong_style is False:</span>
+<span class="sd">            score = &lt;W_q h_q, W_k h_k&gt;</span>
+<span class="sd">        units is not None and luong_style is True:</span>
+<span class="sd">            score = &lt;W h_q, h_k&gt;</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    units: int or None, default None</span>
+<span class="sd">        Project the query and key to vectors with `units` dimension</span>
+<span class="sd">        before applying the attention. If set to None,</span>
+<span class="sd">        the query vector and the key vector are directly used to compute the attention and</span>
+<span class="sd">        should have the same dimension::</span>
+<span class="sd">            If the units is None,</span>
+<span class="sd">                score = &lt;h_q, h_k&gt;</span>
+<span class="sd">            Else if the units is not None and luong_style is False:</span>
+<span class="sd">                score = &lt;W_q h_q, W_k h_k&gt;</span>
+<span class="sd">            Else if the units is not None and luong_style is True:</span>
+<span class="sd">                score = &lt;W h_q, h_k&gt;</span>
+<span class="sd">    luong_style: bool, default False</span>
+<span class="sd">        If turned on, the score will be::</span>
+<span class="sd">            score = &lt;W h_q, h_k&gt;</span>
+<span class="sd">        `units` must be the same as the dimension of the key vector</span>
+<span class="sd">    scaled: bool, default True</span>
+<span class="sd">        Whether to divide the attention weights by the sqrt of the query dimension.</span>
+<span class="sd">        This is first proposed in &quot;[NIPS2017] Attention is all you need.&quot;::</span>
+<span class="sd">            score = &lt;h_q, h_k&gt; / sqrt(dim_q)</span>
+<span class="sd">    normalized: bool, default False</span>
+<span class="sd">        If turned on, the cosine distance is used, i.e::</span>
+<span class="sd">            score = &lt;h_q / ||h_q||, h_k / ||h_k||&gt;</span>
+<span class="sd">    use_bias : bool, default True</span>
+<span class="sd">        Whether to use bias in the projection layers.</span>
+<span class="sd">    dropout : float, default 0.0</span>
+<span class="sd">        Attention dropout</span>
+<span class="sd">    weight_initializer : str or `Initializer` or None, default None</span>
+<span class="sd">        Initializer of the weights</span>
+<span class="sd">    bias_initializer : str or `Initializer`, default &#39;zeros&#39;</span>
+<span class="sd">        Initializer of the bias</span>
+<span class="sd">    prefix : str or None, default None</span>
+<span class="sd">        See document of `Block`.</span>
+<span class="sd">    params : str or None, default None</span>
+<span class="sd">        See document of `Block`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">luong_style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">scaled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">activation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">weight_initializer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bias_initializer</span><span class="o">=</span><span class="s1">&#39;zeros&#39;</span><span class="p">,</span>
+                 <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DotProductAttentionCell</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="n">prefix</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_units</span> <span class="o">=</span> <span class="n">units</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scaled</span> <span class="o">=</span> <span class="n">scaled</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_normalized</span> <span class="o">=</span> <span class="n">normalized</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_bias</span> <span class="o">=</span> <span class="n">use_bias</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_luong_style</span> <span class="o">=</span> <span class="n">luong_style</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dropout</span> <span class="o">=</span> <span class="n">dropout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_activation</span> <span class="o">=</span> <span class="n">activation</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_luong_style</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">units</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;Luong style attention is not available without explicitly &#39;</span> \
+                                      <span class="s1">&#39;setting the units&#39;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_scope</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dropout_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_activation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_scope</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">act</span> <span class="o">=</span> <span class="n">gluon</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">units</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_scope</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_proj_query</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_units</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_use_bias</span><span class="p">,</span>
+                                            <span class="n">flatten</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">weight_initializer</span><span class="o">=</span><span class="n">weight_initializer</span><span class="p">,</span>
+                                            <span class="n">bias_initializer</span><span class="o">=</span><span class="n">bias_initializer</span><span class="p">,</span>
+                                            <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;query_&#39;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_luong_style</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_proj_key</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_units</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_use_bias</span><span class="p">,</span>
+                                              <span class="n">flatten</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">weight_initializer</span><span class="o">=</span><span class="n">weight_initializer</span><span class="p">,</span>
+                                              <span class="n">bias_initializer</span><span class="o">=</span><span class="n">bias_initializer</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;key_&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalized</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_scope</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_l2_norm</span> <span class="o">=</span> <span class="n">L2Normalization</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_compute_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_units</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proj_query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+            <span class="c1"># leakyrelu activation per alibaba rec article is used in self-attention and ffn</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_activation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">act</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_luong_style</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proj_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+                <span class="c1"># leakyrelu activation per alibaba rec article is used in self-attention and ffn</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_activation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">act</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">F</span> <span class="o">==</span> <span class="n">mx</span><span class="o">.</span><span class="n">nd</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">query</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Luong style attention requires key to &#39;</span> \
+                                                         <span class="s1">&#39;have the same dim as the projected &#39;</span> \
+                                                         <span class="s1">&#39;query. Received key </span><span class="si">{}</span><span class="s1">, query </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                                             <span class="n">key</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">query</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalized</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_l2_norm</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_l2_norm</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scaled</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">div_sqrt_dim</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+        <span class="n">att_score</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">batch_dot</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">transpose_b</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">att_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dropout_layer</span><span class="p">(</span><span class="n">_masked_softmax</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">att_score</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">att_weights</span>
+
+
+<span class="k">class</span> <span class="nc">MultiHeadAttentionCell</span><span class="p">(</span><span class="n">AttentionCell</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Multi-head Attention Cell.</span>
+<span class="sd">    In the MultiHeadAttentionCell, the input query/key/value will be linearly projected</span>
+<span class="sd">    for `num_heads` times with different projection matrices. Each projected key, value, query</span>
+<span class="sd">    will be used to calculate the attention weights and values. The output of each head will be</span>
+<span class="sd">    concatenated to form the final output.</span>
+<span class="sd">    The idea is first proposed in &quot;[Arxiv2014] Neural Turing Machines&quot; and</span>
+<span class="sd">    is later adopted in &quot;[NIPS2017] Attention is All You Need&quot; to solve the</span>
+<span class="sd">    Neural Machine Translation problem.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    base_cell : AttentionCell</span>
+<span class="sd">    query_units : int</span>
+<span class="sd">        Total number of projected units for query. Must be divided exactly by num_heads.</span>
+<span class="sd">    key_units : int</span>
+<span class="sd">        Total number of projected units for key. Must be divided exactly by num_heads.</span>
+<span class="sd">    value_units : int</span>
+<span class="sd">        Total number of projected units for value. Must be divided exactly by num_heads.</span>
+<span class="sd">    num_heads : int</span>
+<span class="sd">        Number of parallel attention heads</span>
+<span class="sd">    use_bias : bool, default True</span>
+<span class="sd">        Whether to use bias when projecting the query/key/values</span>
+<span class="sd">    weight_initializer : str or `Initializer` or None, default None</span>
+<span class="sd">        Initializer of the weights.</span>
+<span class="sd">    bias_initializer : str or `Initializer`, default &#39;zeros&#39;</span>
+<span class="sd">        Initializer of the bias.</span>
+<span class="sd">    prefix : str or None, default None</span>
+<span class="sd">        See document of `Block`.</span>
+<span class="sd">    params : str or None, default None</span>
+<span class="sd">        See document of `Block`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_cell</span><span class="p">,</span> <span class="n">query_units</span><span class="p">,</span> <span class="n">key_units</span><span class="p">,</span> <span class="n">value_units</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">weight_initializer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bias_initializer</span><span class="o">=</span><span class="s1">&#39;zeros&#39;</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MultiHeadAttentionCell</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="n">prefix</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_base_cell</span> <span class="o">=</span> <span class="n">base_cell</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_heads</span> <span class="o">=</span> <span class="n">num_heads</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_bias</span> <span class="o">=</span> <span class="n">use_bias</span>
+        <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="n">query_units</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">key_units</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">value_units</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">units</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">unit</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_heads</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s1">&#39;In MultiHeadAttetion, the </span><span class="si">{name}</span><span class="s1">_units should be divided exactly&#39;</span>
+                    <span class="s1">&#39; by the number of heads. Received </span><span class="si">{name}</span><span class="s1">_units=</span><span class="si">{unit}</span><span class="s1">, num_heads=</span><span class="si">{n}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">num_heads</span><span class="p">))</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_</span><span class="si">{}</span><span class="s1">_units&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">unit</span><span class="p">)</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_scope</span><span class="p">():</span>
+                <span class="nb">setattr</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;proj_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">),</span>
+                    <span class="n">nn</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_use_bias</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                             <span class="n">weight_initializer</span><span class="o">=</span><span class="n">weight_initializer</span><span class="p">,</span>
+                             <span class="n">bias_initializer</span><span class="o">=</span><span class="n">bias_initializer</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute the attention.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        query : Symbol or NDArray</span>
+<span class="sd">            Query vector. Shape (batch_size, query_length, query_dim)</span>
+<span class="sd">        key : Symbol or NDArray</span>
+<span class="sd">            Key of the memory. Shape (batch_size, memory_length, key_dim)</span>
+<span class="sd">        value : Symbol or NDArray or None, default None</span>
+<span class="sd">            Value of the memory. If set to None, the value will be set as the key.</span>
+<span class="sd">            Shape (batch_size, memory_length, value_dim)</span>
+<span class="sd">        mask : Symbol or NDArray or None, default None</span>
+<span class="sd">            Mask of the memory slots. Shape (batch_size, query_length, memory_length)</span>
+<span class="sd">            Only contains 0 or 1 where 0 means that the memory slot will not be used.</span>
+<span class="sd">            If set to None. No mask will be used.</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        context_vec : Symbol or NDArray</span>
+<span class="sd">            Shape (batch_size, query_length, context_vec_dim)</span>
+<span class="sd">        att_weights : Symbol or NDArray</span>
+<span class="sd">            Attention weights of multiple heads.</span>
+<span class="sd">            Shape (batch_size, num_heads, query_length, memory_length)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">MultiHeadAttentionCell</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="c1"># Shape (batch_size, query_length, query_units)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;proj_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># Shape (batch_size * num_heads, query_length, ele_units)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_heads</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)),</span>
+                        <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>\
+             <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">_compute_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_project</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="s1">&#39;query&#39;</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_project</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">broadcast_axis</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                                    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_heads</span><span class="p">)</span>\
+                    <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">att_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base_cell</span><span class="o">.</span><span class="n">_compute_weight</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">att_weights</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_heads</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_read_by_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">att_weights</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">att_weights</span> <span class="o">=</span> <span class="n">att_weights</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_project</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">context_vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base_cell</span><span class="o">.</span><span class="n">_read_by_weight</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">att_weights</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">context_vec</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">context_vec</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_heads</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                                                      <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+                                  <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">context_vec</span>
+
+
+<span class="k">def</span> <span class="nf">_get_layer_norm</span><span class="p">(</span><span class="n">use_bert</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">layer_norm_eps</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># from gluonnlp.model.bert import BERTLayerNorm</span>
+    <span class="n">layer_norm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span>
+    <span class="k">if</span> <span class="n">layer_norm_eps</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">layer_norm</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">units</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">layer_norm_eps</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">layer_norm</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">units</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">BasePositionwiseFFN</span><span class="p">(</span><span class="n">HybridBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base Structure of the Positionwise Feed-Forward Neural Network.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    units : int</span>
+<span class="sd">        Number of units for the output</span>
+<span class="sd">    hidden_size : int</span>
+<span class="sd">        Number of units in the hidden layer of position-wise feed-forward networks</span>
+<span class="sd">    dropout : float</span>
+<span class="sd">    use_residual : bool</span>
+<span class="sd">    weight_initializer : str or Initializer</span>
+<span class="sd">        Initializer for the input weights matrix, used for the linear</span>
+<span class="sd">        transformation of the inputs.</span>
+<span class="sd">    bias_initializer : str or Initializer</span>
+<span class="sd">        Initializer for the bias vector.</span>
+<span class="sd">    activation : str, default &#39;relu&#39;</span>
+<span class="sd">        Activation function</span>
+<span class="sd">    use_bert_layer_norm : bool, default False.</span>
+<span class="sd">        Whether to use the BERT-stype layer norm implemented in Tensorflow, where</span>
+<span class="sd">        epsilon is added inside the square root. Set to True for pre-trained BERT model.</span>
+<span class="sd">    ffn1_dropout : bool, default False</span>
+<span class="sd">        If True, apply dropout both after the first and second Positionwise</span>
+<span class="sd">        Feed-Forward Neural Network layers. If False, only apply dropout after</span>
+<span class="sd">        the second.</span>
+<span class="sd">    prefix : str, default None</span>
+<span class="sd">        Prefix for name of `Block`s</span>
+<span class="sd">        (and name of weight if params is `None`).</span>
+<span class="sd">    params : Parameter or None</span>
+<span class="sd">        Container for weight sharing between cells.</span>
+<span class="sd">        Created if `None`.</span>
+<span class="sd">    layer_norm_eps : float, default None</span>
+<span class="sd">        Epsilon for layer_norm</span>
+<span class="sd">    Inputs:</span>
+<span class="sd">        - **inputs** : input sequence of shape (batch_size, length, C_in).</span>
+<span class="sd">    Outputs:</span>
+<span class="sd">        - **outputs** : output encoding of shape (batch_size, length, C_out).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">use_residual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">weight_initializer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bias_initializer</span><span class="o">=</span><span class="s1">&#39;zeros&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;leakyrelu&#39;</span><span class="p">,</span>
+                 <span class="n">use_bert_layer_norm</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ffn1_dropout</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">layer_norm_eps</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BasePositionwiseFFN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="n">prefix</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hidden_size</span> <span class="o">=</span> <span class="n">hidden_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_units</span> <span class="o">=</span> <span class="n">units</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_residual</span> <span class="o">=</span> <span class="n">use_residual</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dropout</span> <span class="o">=</span> <span class="n">dropout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ffn1_dropout</span> <span class="o">=</span> <span class="n">ffn1_dropout</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_scope</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ffn_1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                  <span class="n">weight_initializer</span><span class="o">=</span><span class="n">weight_initializer</span><span class="p">,</span>
+                                  <span class="n">bias_initializer</span><span class="o">=</span><span class="n">bias_initializer</span><span class="p">,</span>
+                                  <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;ffn_1_&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_activation</span><span class="p">(</span><span class="n">activation</span><span class="p">)</span> <span class="k">if</span> <span class="n">activation</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ffn_2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                  <span class="n">weight_initializer</span><span class="o">=</span><span class="n">weight_initializer</span><span class="p">,</span>
+                                  <span class="n">bias_initializer</span><span class="o">=</span><span class="n">bias_initializer</span><span class="p">,</span>
+                                  <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;ffn_2_&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">dropout</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dropout_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">rate</span><span class="o">=</span><span class="n">dropout</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">layer_norm</span> <span class="o">=</span> <span class="n">_get_layer_norm</span><span class="p">(</span><span class="n">use_bert_layer_norm</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span>
+                                              <span class="n">layer_norm_eps</span><span class="o">=</span><span class="n">layer_norm_eps</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_activation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">act</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get activation block based on the name. &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+
+            <span class="c1"># per alibaba rec article leakyRELU is used in self-attention and ffn</span>
+            <span class="k">if</span> <span class="n">act</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;leakyrelu&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">gluon</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">gluon</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Activation</span><span class="p">(</span><span class="n">act</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="n">gluon</span><span class="o">.</span><span class="n">Block</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">act</span>
+
+    <span class="k">def</span> <span class="nf">hybrid_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>  <span class="c1"># pylint: disable=arguments-differ</span>
+        <span class="c1"># pylint: disable=unused-argument</span>
+        <span class="sd">&quot;&quot;&quot;Position-wise encoding of the inputs.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        inputs : Symbol or NDArray</span>
+<span class="sd">            Input sequence. Shape (batch_size, length, C_in)</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        outputs : Symbol or NDArray</span>
+<span class="sd">            Shape (batch_size, length, C_out)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ffn_1</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dropout</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ffn1_dropout</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout_layer</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ffn_2</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dropout</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout_layer</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_residual</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">outputs</span> <span class="o">+</span> <span class="n">inputs</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layer_norm</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">outputs</span>
+
+
+<span class="k">class</span> <span class="nc">PositionwiseFFN</span><span class="p">(</span><span class="n">BasePositionwiseFFN</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Structure of the Positionwise Feed-Forward Neural Network for</span>
+<span class="sd">    Transformer.</span>
+<span class="sd">    Computes the positionwise encoding of the inputs.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    units : int</span>
+<span class="sd">        Number of units for the output</span>
+<span class="sd">    hidden_size : int</span>
+<span class="sd">        Number of units in the hidden layer of position-wise feed-forward networks</span>
+<span class="sd">    dropout : float</span>
+<span class="sd">        Dropout probability for the output</span>
+<span class="sd">    use_residual : bool</span>
+<span class="sd">        Add residual connection between the input and the output</span>
+<span class="sd">    ffn1_dropout : bool, default False</span>
+<span class="sd">        If True, apply dropout both after the first and second Positionwise</span>
+<span class="sd">        Feed-Forward Neural Network layers. If False, only apply dropout after</span>
+<span class="sd">        the second.</span>
+<span class="sd">    weight_initializer : str or Initializer</span>
+<span class="sd">        Initializer for the input weights matrix, used for the linear</span>
+<span class="sd">        transformation of the inputs.</span>
+<span class="sd">    bias_initializer : str or Initializer</span>
+<span class="sd">        Initializer for the bias vector.</span>
+<span class="sd">    prefix : str, default None</span>
+<span class="sd">        Prefix for name of `Block`s (and name of weight if params is `None`).</span>
+<span class="sd">    params : Parameter or None</span>
+<span class="sd">        Container for weight sharing between cells. Created if `None`.</span>
+<span class="sd">    activation : str, default &#39;relu&#39;</span>
+<span class="sd">        Activation methods in PositionwiseFFN</span>
+<span class="sd">    layer_norm_eps : float, default None</span>
+<span class="sd">        Epsilon for layer_norm</span>
+<span class="sd">    Inputs:</span>
+<span class="sd">        - **inputs** : input sequence of shape (batch_size, length, C_in).</span>
+<span class="sd">    Outputs:</span>
+<span class="sd">        - **outputs** : output encoding of shape (batch_size, length, C_out).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">use_residual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">ffn1_dropout</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">weight_initializer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bias_initializer</span><span class="o">=</span><span class="s1">&#39;zeros&#39;</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">layer_norm_eps</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PositionwiseFFN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span>
+            <span class="n">hidden_size</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span>
+            <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span>
+            <span class="n">use_residual</span><span class="o">=</span><span class="n">use_residual</span><span class="p">,</span>
+            <span class="n">weight_initializer</span><span class="o">=</span><span class="n">weight_initializer</span><span class="p">,</span>
+            <span class="n">bias_initializer</span><span class="o">=</span><span class="n">bias_initializer</span><span class="p">,</span>
+            <span class="n">prefix</span><span class="o">=</span><span class="n">prefix</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+            <span class="c1"># extra configurations for transformer</span>
+            <span class="n">activation</span><span class="o">=</span><span class="n">activation</span><span class="p">,</span>
+            <span class="n">use_bert_layer_norm</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">layer_norm_eps</span><span class="o">=</span><span class="n">layer_norm_eps</span><span class="p">,</span>
+            <span class="n">ffn1_dropout</span><span class="o">=</span><span class="n">ffn1_dropout</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_position_encoding_init</span><span class="p">(</span><span class="n">max_length</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Init the sinusoid position encoding table &quot;&quot;&quot;</span>
+    <span class="n">position_enc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">max_length</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> \
+                   <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">/</span> <span class="n">dim</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))))</span>
+    <span class="n">position_enc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">position_enc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">position_enc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">position_enc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">position_enc</span>
+
+<span class="k">def</span> <span class="nf">_position_encoding_init_BST</span><span class="p">(</span><span class="n">max_length</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;For the BST recommender, the positional embedding takes the time of item being clicked as</span>
+<span class="sd">    input feature and calculates the position value of item vi as p(vt) - p(vi) where</span>
+<span class="sd">    p(vt) is recommending time and p(vi) is time the user clicked on item vi</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Assume position_enc is the p(vt) - p(vi) fed as input</span>
+    <span class="n">position_enc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">max_length</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> \
+                   <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">/</span> <span class="n">dim</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))))</span>
+    <span class="k">return</span> <span class="n">position_enc</span>
+
+<span class="k">class</span> <span class="nc">Rec</span><span class="p">(</span><span class="n">HybridBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Alibaba transformer based recommender&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Rec</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_scope</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">otherfeatures</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">_OTHER_LEN</span><span class="p">,</span>
+                                               <span class="n">output_dim</span><span class="o">=</span><span class="n">_EMB_DIM</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">_SEQ_LEN</span><span class="p">,</span>
+                                           <span class="n">output_dim</span><span class="o">=</span><span class="n">_EMB_DIM</span><span class="p">)</span>
+            <span class="c1"># Transformer layers</span>
+            <span class="c1"># Multi-head attention with base cell scaled dot-product attention</span>
+            <span class="c1"># Use b=1 self-attention blocks per article recommendation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cell</span> <span class="o">=</span> <span class="n">_get_attention_cell</span><span class="p">(</span><span class="s1">&#39;multi_head&#39;</span><span class="p">,</span>
+                                            <span class="n">units</span><span class="o">=</span><span class="n">_UNITS</span><span class="p">,</span>
+                                            <span class="n">scaled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                            <span class="n">dropout</span><span class="o">=</span><span class="n">_DROP</span><span class="p">,</span>
+                                            <span class="n">num_heads</span><span class="o">=</span><span class="n">_NUM_HEADS</span><span class="p">,</span>
+                                            <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">proj</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="n">_UNITS</span><span class="p">,</span>
+                                 <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                 <span class="n">bias_initializer</span><span class="o">=</span><span class="s1">&#39;zeros&#39;</span><span class="p">,</span>
+                                 <span class="n">weight_initializer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">flatten</span><span class="o">=</span><span class="kc">False</span>
+                                 <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drop_out_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">rate</span><span class="o">=</span><span class="n">_DROP</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ffn</span> <span class="o">=</span> <span class="n">PositionwiseFFN</span><span class="p">(</span><span class="n">hidden_size</span><span class="o">=</span><span class="n">_UNITS</span><span class="p">,</span>
+                                       <span class="n">use_residual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                       <span class="n">dropout</span><span class="o">=</span><span class="n">_DROP</span><span class="p">,</span>
+                                       <span class="n">units</span><span class="o">=</span><span class="n">_UNITS</span><span class="p">,</span>
+                                       <span class="n">weight_initializer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                       <span class="n">bias_initializer</span><span class="o">=</span><span class="s1">&#39;zeros&#39;</span><span class="p">,</span>
+                                       <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;leakyrelu&#39;</span>
+                                       <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">layer_norm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">_UNITS</span><span class="p">)</span>
+            <span class="c1"># Final MLP layers; BST dimensions in the article were 1024, 512, 256</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">HybridSequential</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_arange_like</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Helper function to generate indices of a range&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">F</span> <span class="o">==</span> <span class="n">mx</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+            <span class="n">seq_len</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span>
+            <span class="n">arange</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">seq_len</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">inputs</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">ctx</span><span class="o">=</span><span class="n">inputs</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">input_axis</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="n">begin</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">zeros</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">input_axis</span><span class="p">)</span>
+            <span class="n">arange</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                              <span class="n">infer_range</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">inputs</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+            <span class="n">arange</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">elemwise_add</span><span class="p">(</span><span class="n">arange</span><span class="p">,</span> <span class="n">zeros</span><span class="p">)</span>
+            <span class="c1"># print(arange)</span>
+        <span class="k">return</span> <span class="n">arange</span>
+
+    <span class="k">def</span> <span class="nf">_get_positional</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight_type</span><span class="p">,</span> <span class="n">max_length</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">weight_type</span> <span class="o">==</span> <span class="s1">&#39;sinusoidal&#39;</span><span class="p">:</span>
+            <span class="n">encoding</span> <span class="o">=</span> <span class="n">_position_encoding_init</span><span class="p">(</span><span class="n">max_length</span><span class="p">,</span> <span class="n">units</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">weight_type</span> <span class="o">==</span> <span class="s1">&#39;BST&#39;</span><span class="p">:</span>
+            <span class="c1"># BST position fed as input</span>
+            <span class="n">encoding</span> <span class="o">=</span> <span class="n">_position_encoding_init_BST</span><span class="p">(</span><span class="n">max_length</span><span class="p">,</span> <span class="n">units</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Not known&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mx</span><span class="o">.</span><span class="n">nd</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">hybrid_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x_other</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># The manually engineered features</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">otherfeatures</span><span class="p">(</span><span class="n">x_other</span><span class="p">)</span>
+
+        <span class="c1"># The transformer encoder</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_arange_like</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">position_weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_positional</span><span class="p">(</span><span class="s1">&#39;BST&#39;</span><span class="p">,</span> <span class="n">_SEQ_LEN</span><span class="p">,</span> <span class="n">_UNITS</span><span class="p">)</span>
+        <span class="c1"># add positional embedding</span>
+        <span class="n">positional_embedding</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">position_weight</span><span class="p">,</span> <span class="n">_SEQ_LEN</span><span class="p">,</span> <span class="n">_UNITS</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">broadcast_add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">positional_embedding</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="c1"># attention cell with dropout</span>
+        <span class="n">out_x</span><span class="p">,</span> <span class="n">attn_w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+        <span class="n">out_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="p">(</span><span class="n">out_x</span><span class="p">)</span>
+        <span class="n">out_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_out_layer</span><span class="p">(</span><span class="n">out_x</span><span class="p">)</span>
+        <span class="c1"># add and norm</span>
+        <span class="n">out_x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">out_x</span>
+        <span class="n">out_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layer_norm</span><span class="p">(</span><span class="n">out_x</span><span class="p">)</span>
+        <span class="c1"># ffn</span>
+        <span class="n">out_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ffn</span><span class="p">(</span><span class="n">out_x</span><span class="p">)</span>
+
+        <span class="c1"># concat engineered features with transformer representations</span>
+        <span class="n">out_x</span> <span class="o">=</span> <span class="n">mx</span><span class="o">.</span><span class="n">ndarray</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">out_x</span><span class="p">,</span> <span class="n">x1</span><span class="p">)</span>
+        <span class="c1"># leakyrelu final layers</span>
+        <span class="n">out_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">out_x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out_x</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="train">
+<h2>Train<a class="headerlink" href="#train" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_sample</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Generate toy X and y. One target item.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">mx</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">mx</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+    <span class="c1"># Data loader</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">gluon</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ArrayDataset</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">gluon</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">_BATCH</span><span class="p">,</span> <span class="n">last_batch</span><span class="o">=</span><span class="s1">&#39;keep&#39;</span><span class="p">)</span>
+
+
+<span class="n">train_metric</span> <span class="o">=</span> <span class="n">mx</span><span class="o">.</span><span class="n">metric</span><span class="o">.</span><span class="n">Accuracy</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">train</span><span class="p">():</span>
+    <span class="n">train_data</span> <span class="o">=</span> <span class="n">generate_sample</span><span class="p">()</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">mx</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Adam</span><span class="p">()</span>
+    <span class="c1"># Binary classification problem; predict if user clicks target item</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">gluon</span><span class="o">.</span><span class="n">loss</span><span class="o">.</span><span class="n">SigmoidBinaryCrossEntropyLoss</span><span class="p">()</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">Rec</span><span class="p">()</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+    <span class="n">trainer</span> <span class="o">=</span> <span class="n">gluon</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">collect_params</span><span class="p">(),</span>
+                            <span class="n">optimizer</span><span class="p">)</span>
+    <span class="c1"># train_metric = mx.metric.Accuracy()</span>
+    <span class="n">epochs</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="n">train_metric</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">train_data</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">ag</span><span class="o">.</span><span class="n">record</span><span class="p">():</span>
+                <span class="c1"># assume x contains sequential inputs and manually engineered features</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">32</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">32</span><span class="p">:])</span>
+                <span class="n">l</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">trainer</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">_BATCH</span><span class="p">)</span>
+        <span class="n">train_metric</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">train_metric</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;accuracy&#39;, 0.0)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="test">
+<h2>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_SEQ_LEN</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">_BATCH</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ctx</span> <span class="o">=</span> <span class="n">mx</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">_tst_module</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">collect_params</span><span class="p">()</span>
+    <span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">mx</span><span class="o">.</span><span class="n">nd</span><span class="o">.</span><span class="n">waitall</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">mx</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">_BATCH</span><span class="p">,</span> <span class="n">_SEQ_LEN</span><span class="p">),</span> <span class="n">ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">)</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">Rec</span><span class="p">()</span>
+    <span class="n">_tst_module</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sparsh-ai/transformer-rec",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="T602245_BST_in_PyTorch.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">BST in PyTorch</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="T007665_BST_on_ML_1m_in_Keras.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">BST on ML-1m in Keras</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Sparsh A.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

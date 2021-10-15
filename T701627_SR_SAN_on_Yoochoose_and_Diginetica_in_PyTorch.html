@@ -1,0 +1,1560 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SR-SAN on Yoochoose and Diginetica in PyTorch &#8212; transformer-rec</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GC-SAN in PyTorch" href="T472955_GC_SAN_in_PyTorch.html" />
+    <link rel="prev" title="SASRec in PyTorch" href="T757997_SASRec_in_PyTorch.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">transformer-rec</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="US780867_Transformer_based_Recommenders.html">
+   Transformer-based Recommenders
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L413721_Language_modeling_approaches.html">
+   Language modeling approaches
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L270195_Attention_mechanism.html">
+   Attention mechanism
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L879284_Transformers.html">
+   Transformers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L137141_Stochastic_shared_embeddings.html">
+   Stochastic shared embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L201302_GeLU_activation.html">
+   GeLU activation
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Baselines
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C889944_GRU4Rec.html">
+   GRU4Rec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C505509_Caser.html">
+   Caser
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C001344_NARM.html">
+   NARM
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="C065971_SASRec.html">
+   SASRec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C759066_BERT4Rec.html">
+   BERT4Rec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C220331_BST.html">
+   BST
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C655229_SSE_PT.html">
+   SSE-PT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C776172_DMT.html">
+   DMT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C879945_MATN.html">
+   MATN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C699874_GC_SAN.html">
+   GC-SAN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="C306687_SR_SAN.html">
+   SR-SAN
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Case studies
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="L109171_Santander.html">
+   Santander
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L850171_Taobao.html">
+   Taobao
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L733018_Scribd.html">
+   Scribd
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="L192514_1mg.html">
+   1mg
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="T034923_BERT4Rec_on_ML_1m_in_PyTorch.html">
+   BERT4Rec on ML-1m in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T595874_BERT4Rec_on_ML_25m_in_PyTorch_Lightning.html">
+   BERT4Rec on ML-25m in PyTorch Lightning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T881207_BST_on_ML_1m_in_PyTorch.html">
+   BST on ML-1m in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T602245_BST_in_PyTorch.html">
+   BST in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T088416_BST_in_MXNet.html">
+   BST in MXNet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T007665_BST_on_ML_1m_in_Keras.html">
+   BST on ML-1m in Keras
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T025247_BST_in_Deepctr.html">
+   BST in Deepctr
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T975104_SSE_PT_on_ML_1m_in_Tensorflow.x.html">
+   SSE-PT on ML-1m in Tensorflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T225287_SASRec_on_ML_1m_in_PaddlePaddle.html">
+   SASRec on ML-1m in PaddlePaddle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T757997_SASRec_in_PyTorch.html">
+   SASRec in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   SR-SAN on Yoochoose and Diginetica in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T472955_GC_SAN_in_PyTorch.html">
+   GC-SAN in PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T161774_MATN_on_Yelp_in_Tensorflow.html">
+   MATN on Yelp in Tensorflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T970274_Transformers4Rec_Session_based_Recommender_on_Yoochoose.html">
+   Transformers4Rec Session-based Recommender on Yoochoose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T382183_Transformers4Rec_XLNet_on_Synthetic_data_.html">
+   Transformers4Rec XLNet on Synthetic data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T793395_Transformers4Rec_session_based_recommender_on_REES46.html">
+   Transformers4Rec session-based recommender on REES46
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T512933_Language_Modeling_with_nn.Transformer_and_TorchText.html">
+   Language Modeling with nn.Transformer and TorchText
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="T904848_Transformer_from_scratch_in_PyTorch.html">
+   Transformer from scratch in PyTorch
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/T701627_SR_SAN_on_Yoochoose_and_Diginetica_in_PyTorch.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/transformer-rec/main?urlpath=lab/tree/docs/T701627_SR_SAN_on_Yoochoose_and_Diginetica_in_PyTorch.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/transformer-rec/blob/main/docs/T701627_SR_SAN_on_Yoochoose_and_Diginetica_in_PyTorch.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#installations">
+     Installations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imports">
+     Imports
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#datasets">
+   Datasets
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#yoochoose">
+     Yoochoose
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diginetica">
+     Diginetica
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#utils">
+   Utils
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model">
+   Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run">
+   Run
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="sr-san-on-yoochoose-and-diginetica-in-pytorch">
+<h1>SR-SAN on Yoochoose and Diginetica in PyTorch<a class="headerlink" href="#sr-san-on-yoochoose-and-diginetica-in-pytorch" title="Permalink to this headline">¶</a></h1>
+<p>Session-based recommendation aims to predict user’s next behavior from current session and previous anonymous sessions. Capturing long-range dependencies between items is a vital challenge in session-based recommendation. A novel approach is proposed for session-based recommendation with self-attention networks (SR-SAN) as a remedy. The self-attention networks (SAN) allow SR-SAN capture the global dependencies among all items of a session regardless of their distance. In SR-SAN, a single item latent vector is used to capture both current interest and global interest instead of session embedding which is composed of current interest embedding and global interest embedding. Some experiments have been performed on some open benchmark datasets. Experimental results show that the proposed method outperforms some state-of-the-arts by comparisons.</p>
+<p>Firstly, a self-attention based model which captures and reserves the full dependencies among all items regardless of their distance is proposed without using RNNs or GNNs. Secondly, to generate session-based recommendations, the proposed method use a single item latent vector which jointly represents current interest and global interest instead of session embedding which is composed of current interest embedding and global interest embedding. In RNNs or GNNs based methods, the global interest embedding usually obtained by aggregating all items in the session with attention mechanism which is based on current interest embedding. However, this is redundant in SR-SAN which last item embedding is aggregating all items in the session with self-attention mechanism. In this way, the last item embedding in session can jointly represent current interest and global interest.</p>
+<p>It utilizes the self-attention to learn global item dependencies. The multi-head attention mechanism is adopted to allow SR-SAN focus on different important part of the session. The latent vector of the last item in the session is used to jointly represents current interest and global interest with prediction layer.</p>
+<img src='_images/T701627_i1.png'>
+<p>Session-based recommender system makes prediction based upon current user sessions data without accessing to the long-term preference profile. Let <span class="math notranslate nohighlight">\(V = \{v_1, v_2, . . ., v_{|V|}\}\)</span> denote the set consisting of all unique items involved in all the sessions. An anonymous session sequence <span class="math notranslate nohighlight">\(S\)</span> can be represented by a list <span class="math notranslate nohighlight">\(S = [s_1, s_2, . . ., s_n]\)</span>, where <span class="math notranslate nohighlight">\(s_i ∈ V\)</span> represents a clicked item of the user within the session <span class="math notranslate nohighlight">\(S\)</span>. The task of session-based recommendation is to predict the next click <span class="math notranslate nohighlight">\(s_{n+1}\)</span> for session <span class="math notranslate nohighlight">\(S\)</span>. Our models are constructed and trained as a classifier that learns to generate a score for each of the candidates in <span class="math notranslate nohighlight">\(V\)</span>. Let <span class="math notranslate nohighlight">\(\hat{y} = \{\hat{y}_1, \hat{y}_2, . . ., \hat{y}_{|V|}\}\)</span> denote the output score vector, where <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> corresponds to the score of item <span class="math notranslate nohighlight">\(v_i\)</span>. The items with top-K values in <span class="math notranslate nohighlight">\(\hat{y}\)</span> will be the candidate items for recommendation.</p>
+<p>The proposed model is made up of two parts. The first part is obtaining item latent vectors with self-attention networks, the second part of the proposed model is making recommendation with prediction layer.</p>
+<p><strong>Comparisons with Some Baseline Methods</strong></p>
+<img src='_images/T701627_i2.png' width=50%><div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installations">
+<h3>Installations<a class="headerlink" href="#installations" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install torch==1.2
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="imports">
+<h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">Module</span><span class="p">,</span> <span class="n">Parameter</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">TransformerEncoder</span>
+<span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">TransformerEncoderLayer</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="datasets">
+<h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="yoochoose">
+<h3>Yoochoose<a class="headerlink" href="#yoochoose" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!wget https://s3-eu-west-1.amazonaws.com/yc-rdata/yoochoose-data.7z
+!7z x yoochoose-data.7z -o./yoochoose-data
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yoochoose_data_path</span> <span class="o">=</span> <span class="s1">&#39;/content/yoochoose-data&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>class YoochooseDataset:
+    def __init__(self, path=&#39;./&#39;):
+        self.path = path
+
+    def preprocess(self):
+        dataset = os.path.join(self.path, &#39;yoochoose-clicks.dat&#39;)
+        !sed -i &#39;1i session_id,timestamp,item_id,category&#39; $dataset
+        print(&quot;-- Starting @ %ss&quot; % datetime.datetime.now())
+        with open(dataset, &quot;r&quot;) as f:
+            reader = csv.DictReader(f, delimiter=&#39;,&#39;)
+            sess_clicks = {}
+            sess_date = {}
+            ctr = 0
+            curid = -1
+            curdate = None
+            for data in reader:
+                sessid = data[&#39;session_id&#39;]
+                if curdate and not curid == sessid:
+                    date = &#39;&#39;
+                    date = time.mktime(time.strptime(curdate[:19], &#39;%Y-%m-%dT%H:%M:%S&#39;))
+                    sess_date[curid] = date
+                curid = sessid
+                item = data[&#39;item_id&#39;]
+                curdate = &#39;&#39;
+                curdate = data[&#39;timestamp&#39;]
+                if sessid in sess_clicks:
+                    sess_clicks[sessid] += [item]
+                else:
+                    sess_clicks[sessid] = [item]
+                ctr += 1
+            date = &#39;&#39;
+            date = time.mktime(time.strptime(curdate[:19], &#39;%Y-%m-%dT%H:%M:%S&#39;))
+            sess_date[curid] = date
+
+        print(&quot;-- Reading data @ %ss&quot; % datetime.datetime.now())
+
+        # Filter out length 1 sessions
+        for s in list(sess_clicks):
+            if len(sess_clicks[s]) == 1:
+                del sess_clicks[s]
+                del sess_date[s]
+
+        # Count number of times each item appears
+        iid_counts = {}
+        for s in sess_clicks:
+            seq = sess_clicks[s]
+            for iid in seq:
+                if iid in iid_counts:
+                    iid_counts[iid] += 1
+                else:
+                    iid_counts[iid] = 1
+
+        sorted_counts = sorted(iid_counts.items(), key=operator.itemgetter(1))
+
+        length = len(sess_clicks)
+        for s in list(sess_clicks):
+            curseq = sess_clicks[s]
+            filseq = list(filter(lambda i: iid_counts[i] &gt;= 5, curseq))
+            if len(filseq) &lt; 2:
+                del sess_clicks[s]
+                del sess_date[s]
+            else:
+                sess_clicks[s] = filseq
+
+        # Split out test set based on dates
+        dates = list(sess_date.items())
+        maxdate = dates[0][1]
+
+        for _, date in dates:
+            if maxdate &lt; date:
+                maxdate = date
+
+        # 7 days for test
+        splitdate = 0
+        splitdate = maxdate - 86400 * 1  # the number of seconds for a day：86400
+
+        print(&#39;Splitting date&#39;, splitdate)      # Yoochoose: (&#39;Split date&#39;, 1411930799.0)
+        tra_sess = filter(lambda x: x[1] &lt; splitdate, dates)
+        tes_sess = filter(lambda x: x[1] &gt; splitdate, dates)
+
+        # Sort sessions by date
+        tra_sess = sorted(tra_sess, key=operator.itemgetter(1))     # [(session_id, timestamp), (), ]
+        tes_sess = sorted(tes_sess, key=operator.itemgetter(1))     # [(session_id, timestamp), (), ]
+        print(len(tra_sess))    # 186670    # 7966257
+        print(len(tes_sess))    # 15979     # 15324
+        print(tra_sess[:3])
+        print(tes_sess[:3])
+        
+        print(&quot;-- Splitting train set and test set @ %ss&quot; % datetime.datetime.now())
+
+        # Choosing item count &gt;=5 gives approximately the same number of items as reported in paper
+        item_dict = {}
+        # Convert training sessions to sequences and renumber items to start from 1
+        def obtian_tra():
+            train_ids = []
+            train_seqs = []
+            train_dates = []
+            item_ctr = 1
+            for s, date in tra_sess:
+                seq = sess_clicks[s]
+                outseq = []
+                for i in seq:
+                    if i in item_dict:
+                        outseq += [item_dict[i]]
+                    else:
+                        outseq += [item_ctr]
+                        item_dict[i] = item_ctr
+                        item_ctr += 1
+                if len(outseq) &lt; 2:  # Doesn&#39;t occur
+                    continue
+                train_ids += [s]
+                train_dates += [date]
+                train_seqs += [outseq]
+            print(item_ctr)     # 43098, 37484
+            return train_ids, train_dates, train_seqs
+
+
+        # Convert test sessions to sequences, ignoring items that do not appear in training set
+        def obtian_tes():
+            test_ids = []
+            test_seqs = []
+            test_dates = []
+            for s, date in tes_sess:
+                seq = sess_clicks[s]
+                outseq = []
+                for i in seq:
+                    if i in item_dict:
+                        outseq += [item_dict[i]]
+                if len(outseq) &lt; 2:
+                    continue
+                test_ids += [s]
+                test_dates += [date]
+                test_seqs += [outseq]
+            return test_ids, test_dates, test_seqs
+
+        tra_ids, tra_dates, tra_seqs = obtian_tra()
+        tes_ids, tes_dates, tes_seqs = obtian_tes()
+
+        def process_seqs(iseqs, idates):
+            out_seqs = []
+            out_dates = []
+            labs = []
+            ids = []
+            for id, seq, date in zip(range(len(iseqs)), iseqs, idates):
+                for i in range(1, len(seq)):
+                    tar = seq[-i]
+                    labs += [tar]
+                    out_seqs += [seq[:-i]]
+                    out_dates += [date]
+                    ids += [id]
+            return out_seqs, out_dates, labs, ids
+
+        tr_seqs, tr_dates, tr_labs, tr_ids = process_seqs(tra_seqs, tra_dates)
+        te_seqs, te_dates, te_labs, te_ids = process_seqs(tes_seqs, tes_dates)
+        tra = (tr_seqs, tr_labs)
+        tes = (te_seqs, te_labs)
+        print(len(tr_seqs))
+        print(len(te_seqs))
+        print(tr_seqs[:3], tr_dates[:3], tr_labs[:3])
+        print(te_seqs[:3], te_dates[:3], te_labs[:3])
+        all = 0
+
+        for seq in tra_seqs:
+            all += len(seq)
+        for seq in tes_seqs:
+            all += len(seq)
+        print(&#39;avg length: &#39;, all/(len(tra_seqs) + len(tes_seqs) * 1.0))
+
+        if not os.path.exists(&#39;yoochoose1_64&#39;):
+            os.makedirs(&#39;yoochoose1_64&#39;)
+        pickle.dump(tes, open(&#39;yoochoose1_64/test.txt&#39;, &#39;wb&#39;))
+        split64 = int(len(tr_seqs) / 64)
+        print(len(tr_seqs[-split64:]))
+
+        tra64 = (tr_seqs[-split64:], tr_labs[-split64:])
+        seq64 = tra_seqs[tr_ids[-split64]:]
+
+        pickle.dump(tra64, open(&#39;yoochoose1_64/train.txt&#39;, &#39;wb&#39;))
+        pickle.dump(seq64, open(&#39;yoochoose1_64/all_train_seq.txt&#39;, &#39;wb&#39;))
+
+        print(&#39;Done.&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yc_data</span> <span class="o">=</span> <span class="n">YoochooseDataset</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">yoochoose_data_path</span><span class="p">)</span>
+<span class="n">yc_data</span><span class="o">.</span><span class="n">preprocess</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-- Starting @ 2021-10-10 06:45:53.102228s
+-- Reading data @ 2021-10-10 06:51:22.149279s
+Splitting date 1411959599.0
+7966257
+15324
+[(&#39;171168&#39;, 1396321232.0), (&#39;345618&#39;, 1396321275.0), (&#39;263073&#39;, 1396321302.0)]
+[(&#39;11532683&#39;, 1411959653.0), (&#39;11464959&#39;, 1411959671.0), (&#39;11296119&#39;, 1411959695.0)]
+-- Splitting train set and test set @ 2021-10-10 06:52:17.837169s
+37484
+23670982
+55898
+[[1], [3], [5, 5]] [1396321232.0, 1396321275.0, 1396321302.0] [2, 4, 5]
+[[33611, 37169, 6409], [33611, 37169], [33611]] [1411959653.0, 1411959653.0, 1411959653.0] [33128, 6409, 37169]
+avg length:  3.9727042800167034
+369859
+Done.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="diginetica">
+<h3>Diginetica<a class="headerlink" href="#diginetica" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install -U -q PyDrive dvc dvc[gdrive]
+!dvc get https://github.com/recohut/recodata diginetica/train-item-views.parquet.snappy
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">&#39;/content/train-item-views.parquet.snappy&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sessionId</th>
+      <th>userId</th>
+      <th>itemId</th>
+      <th>timeframe</th>
+      <th>eventdate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>NaN</td>
+      <td>81766</td>
+      <td>526309</td>
+      <td>2016-05-09</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>NaN</td>
+      <td>31331</td>
+      <td>1031018</td>
+      <td>2016-05-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>NaN</td>
+      <td>32118</td>
+      <td>243569</td>
+      <td>2016-05-09</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>NaN</td>
+      <td>9654</td>
+      <td>75848</td>
+      <td>2016-05-09</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>NaN</td>
+      <td>32627</td>
+      <td>1112408</td>
+      <td>2016-05-09</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;session_id&#39;</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;item_id&#39;</span><span class="p">,</span> <span class="s1">&#39;timeframe&#39;</span><span class="p">,</span> <span class="s1">&#39;eventdate&#39;</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/content/train-item-views.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DigineticaDataset</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;train-item-views.csv&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-- Starting @ </span><span class="si">%s</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="n">sess_clicks</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">sess_date</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">ctr</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">curid</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">curdate</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="n">sessid</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;session_id&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">curdate</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">curid</span> <span class="o">==</span> <span class="n">sessid</span><span class="p">:</span>
+                    <span class="n">date</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                    <span class="n">date</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">mktime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">curdate</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">))</span>
+                    <span class="n">sess_date</span><span class="p">[</span><span class="n">curid</span><span class="p">]</span> <span class="o">=</span> <span class="n">date</span>
+                <span class="n">curid</span> <span class="o">=</span> <span class="n">sessid</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;item_id&#39;</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;timeframe&#39;</span><span class="p">])</span>
+                <span class="n">curdate</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="n">curdate</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;eventdate&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">sessid</span> <span class="ow">in</span> <span class="n">sess_clicks</span><span class="p">:</span>
+                    <span class="n">sess_clicks</span><span class="p">[</span><span class="n">sessid</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">item</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">sess_clicks</span><span class="p">[</span><span class="n">sessid</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">]</span>
+                <span class="n">ctr</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">mktime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">curdate</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">sess_clicks</span><span class="p">):</span>
+                <span class="n">sorted_clicks</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">sess_clicks</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">sess_clicks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">sorted_clicks</span><span class="p">]</span>
+            <span class="n">sess_date</span><span class="p">[</span><span class="n">curid</span><span class="p">]</span> <span class="o">=</span> <span class="n">date</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-- Reading data @ </span><span class="si">%s</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+
+        <span class="c1"># Filter out length 1 sessions</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">sess_clicks</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sess_clicks</span><span class="p">[</span><span class="n">s</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">sess_clicks</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+                <span class="k">del</span> <span class="n">sess_date</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+
+        <span class="c1"># Count number of times each item appears</span>
+        <span class="n">iid_counts</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sess_clicks</span><span class="p">:</span>
+            <span class="n">seq</span> <span class="o">=</span> <span class="n">sess_clicks</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">iid</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">iid</span> <span class="ow">in</span> <span class="n">iid_counts</span><span class="p">:</span>
+                    <span class="n">iid_counts</span><span class="p">[</span><span class="n">iid</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">iid_counts</span><span class="p">[</span><span class="n">iid</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">sorted_counts</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">iid_counts</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sess_clicks</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">sess_clicks</span><span class="p">):</span>
+            <span class="n">curseq</span> <span class="o">=</span> <span class="n">sess_clicks</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+            <span class="n">filseq</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">iid_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">curseq</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filseq</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">sess_clicks</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+                <span class="k">del</span> <span class="n">sess_date</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">sess_clicks</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">filseq</span>
+
+        <span class="c1"># Split out test set based on dates</span>
+        <span class="n">dates</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sess_date</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="n">maxdate</span> <span class="o">=</span> <span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">dates</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">maxdate</span> <span class="o">&lt;</span> <span class="n">date</span><span class="p">:</span>
+                <span class="n">maxdate</span> <span class="o">=</span> <span class="n">date</span>
+
+        <span class="c1"># 7 days for test</span>
+        <span class="n">splitdate</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">splitdate</span> <span class="o">=</span> <span class="n">maxdate</span> <span class="o">-</span> <span class="mi">86400</span> <span class="o">*</span> <span class="mi">7</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Splitting date&#39;</span><span class="p">,</span> <span class="n">splitdate</span><span class="p">)</span>      <span class="c1"># Yoochoose: (&#39;Split date&#39;, 1411930799.0)</span>
+        <span class="n">tra_sess</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">splitdate</span><span class="p">,</span> <span class="n">dates</span><span class="p">)</span>
+        <span class="n">tes_sess</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">splitdate</span><span class="p">,</span> <span class="n">dates</span><span class="p">)</span>
+
+        <span class="c1"># Sort sessions by date</span>
+        <span class="n">tra_sess</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tra_sess</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>     <span class="c1"># [(session_id, timestamp), (), ]</span>
+        <span class="n">tes_sess</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tes_sess</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>     <span class="c1"># [(session_id, timestamp), (), ]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tra_sess</span><span class="p">))</span>    <span class="c1"># 186670    # 7966257</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tes_sess</span><span class="p">))</span>    <span class="c1"># 15979     # 15324</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">tra_sess</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">tes_sess</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-- Splitting train set and test set @ </span><span class="si">%s</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+
+        <span class="c1"># Choosing item count &gt;=5 gives approximately the same number of items as reported in paper</span>
+        <span class="n">item_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># Convert training sessions to sequences and renumber items to start from 1</span>
+        <span class="k">def</span> <span class="nf">obtian_tra</span><span class="p">():</span>
+            <span class="n">train_ids</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">train_seqs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">train_dates</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">item_ctr</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">tra_sess</span><span class="p">:</span>
+                <span class="n">seq</span> <span class="o">=</span> <span class="n">sess_clicks</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+                <span class="n">outseq</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">item_dict</span><span class="p">:</span>
+                        <span class="n">outseq</span> <span class="o">+=</span> <span class="p">[</span><span class="n">item_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">outseq</span> <span class="o">+=</span> <span class="p">[</span><span class="n">item_ctr</span><span class="p">]</span>
+                        <span class="n">item_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_ctr</span>
+                        <span class="n">item_ctr</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">outseq</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Doesn&#39;t occur</span>
+                    <span class="k">continue</span>
+                <span class="n">train_ids</span> <span class="o">+=</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span>
+                <span class="n">train_dates</span> <span class="o">+=</span> <span class="p">[</span><span class="n">date</span><span class="p">]</span>
+                <span class="n">train_seqs</span> <span class="o">+=</span> <span class="p">[</span><span class="n">outseq</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">item_ctr</span><span class="p">)</span>     <span class="c1"># 43098, 37484</span>
+            <span class="k">return</span> <span class="n">train_ids</span><span class="p">,</span> <span class="n">train_dates</span><span class="p">,</span> <span class="n">train_seqs</span>
+
+
+        <span class="c1"># Convert test sessions to sequences, ignoring items that do not appear in training set</span>
+        <span class="k">def</span> <span class="nf">obtian_tes</span><span class="p">():</span>
+            <span class="n">test_ids</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">test_seqs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">test_dates</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">tes_sess</span><span class="p">:</span>
+                <span class="n">seq</span> <span class="o">=</span> <span class="n">sess_clicks</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+                <span class="n">outseq</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">item_dict</span><span class="p">:</span>
+                        <span class="n">outseq</span> <span class="o">+=</span> <span class="p">[</span><span class="n">item_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">outseq</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">test_ids</span> <span class="o">+=</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span>
+                <span class="n">test_dates</span> <span class="o">+=</span> <span class="p">[</span><span class="n">date</span><span class="p">]</span>
+                <span class="n">test_seqs</span> <span class="o">+=</span> <span class="p">[</span><span class="n">outseq</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">test_ids</span><span class="p">,</span> <span class="n">test_dates</span><span class="p">,</span> <span class="n">test_seqs</span>
+
+        <span class="n">tra_ids</span><span class="p">,</span> <span class="n">tra_dates</span><span class="p">,</span> <span class="n">tra_seqs</span> <span class="o">=</span> <span class="n">obtian_tra</span><span class="p">()</span>
+        <span class="n">tes_ids</span><span class="p">,</span> <span class="n">tes_dates</span><span class="p">,</span> <span class="n">tes_seqs</span> <span class="o">=</span> <span class="n">obtian_tes</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">process_seqs</span><span class="p">(</span><span class="n">iseqs</span><span class="p">,</span> <span class="n">idates</span><span class="p">):</span>
+            <span class="n">out_seqs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">out_dates</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">labs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">seq</span><span class="p">,</span> <span class="n">date</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">iseqs</span><span class="p">)),</span> <span class="n">iseqs</span><span class="p">,</span> <span class="n">idates</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)):</span>
+                    <span class="n">tar</span> <span class="o">=</span> <span class="n">seq</span><span class="p">[</span><span class="o">-</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">labs</span> <span class="o">+=</span> <span class="p">[</span><span class="n">tar</span><span class="p">]</span>
+                    <span class="n">out_seqs</span> <span class="o">+=</span> <span class="p">[</span><span class="n">seq</span><span class="p">[:</span><span class="o">-</span><span class="n">i</span><span class="p">]]</span>
+                    <span class="n">out_dates</span> <span class="o">+=</span> <span class="p">[</span><span class="n">date</span><span class="p">]</span>
+                    <span class="n">ids</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">out_seqs</span><span class="p">,</span> <span class="n">out_dates</span><span class="p">,</span> <span class="n">labs</span><span class="p">,</span> <span class="n">ids</span>
+
+        <span class="n">tr_seqs</span><span class="p">,</span> <span class="n">tr_dates</span><span class="p">,</span> <span class="n">tr_labs</span><span class="p">,</span> <span class="n">tr_ids</span> <span class="o">=</span> <span class="n">process_seqs</span><span class="p">(</span><span class="n">tra_seqs</span><span class="p">,</span> <span class="n">tra_dates</span><span class="p">)</span>
+        <span class="n">te_seqs</span><span class="p">,</span> <span class="n">te_dates</span><span class="p">,</span> <span class="n">te_labs</span><span class="p">,</span> <span class="n">te_ids</span> <span class="o">=</span> <span class="n">process_seqs</span><span class="p">(</span><span class="n">tes_seqs</span><span class="p">,</span> <span class="n">tes_dates</span><span class="p">)</span>
+        <span class="n">tra</span> <span class="o">=</span> <span class="p">(</span><span class="n">tr_seqs</span><span class="p">,</span> <span class="n">tr_labs</span><span class="p">)</span>
+        <span class="n">tes</span> <span class="o">=</span> <span class="p">(</span><span class="n">te_seqs</span><span class="p">,</span> <span class="n">te_labs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tr_seqs</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">te_seqs</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">tr_seqs</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">tr_dates</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">tr_labs</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">te_seqs</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">te_dates</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">te_labs</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+        <span class="nb">all</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">tra_seqs</span><span class="p">:</span>
+            <span class="nb">all</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">tes_seqs</span><span class="p">:</span>
+            <span class="nb">all</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;avg length: &#39;</span><span class="p">,</span> <span class="nb">all</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tra_seqs</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">tes_seqs</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;diginetica&#39;</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;diginetica&#39;</span><span class="p">)</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">tra</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;diginetica/train.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">tes</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;diginetica/test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">tra_seqs</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;diginetica/all_train_seq.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yc_data</span> <span class="o">=</span> <span class="n">DigineticaDataset</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;/content&#39;</span><span class="p">)</span>
+<span class="n">yc_data</span><span class="o">.</span><span class="n">preprocess</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-- Starting @ 2021-10-10 07:33:25.005299s
+-- Reading data @ 2021-10-10 07:33:39.738651s
+Splitting date 1464134400.0
+186670
+15979
+[(&#39;4737&#39;, 1451606400.0), (&#39;4741&#39;, 1451606400.0), (&#39;4742&#39;, 1451606400.0)]
+[(&#39;289&#39;, 1464220800.0), (&#39;290&#39;, 1464220800.0), (&#39;302&#39;, 1464220800.0)]
+-- Splitting train set and test set @ 2021-10-10 07:33:42.234211s
+43098
+719470
+60858
+[[1], [3, 4], [3]] [1451606400.0, 1451606400.0, 1451606400.0] [2, 5, 4]
+[[21553, 20071, 8762, 21566, 6381], [21553, 20071, 8762, 21566], [21553, 20071, 8762]] [1464220800.0, 1464220800.0, 1464220800.0] [21566, 6381, 21566]
+avg length:  4.850942344040704
+Done.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="utils">
+<h2>Utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">data_masks</span><span class="p">(</span><span class="n">all_usr_pois</span><span class="p">,</span> <span class="n">item_tail</span><span class="p">):</span>
+    <span class="n">us_lens</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">upois</span><span class="p">)</span> <span class="k">for</span> <span class="n">upois</span> <span class="ow">in</span> <span class="n">all_usr_pois</span><span class="p">]</span>
+    <span class="n">len_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">us_lens</span><span class="p">)</span>
+    <span class="n">us_pois</span> <span class="o">=</span> <span class="p">[</span><span class="n">upois</span> <span class="o">+</span> <span class="n">item_tail</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_max</span> <span class="o">-</span> <span class="n">le</span><span class="p">)</span> <span class="k">for</span> <span class="n">upois</span><span class="p">,</span> <span class="n">le</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">all_usr_pois</span><span class="p">,</span> <span class="n">us_lens</span><span class="p">)]</span>
+    <span class="n">us_msks</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">le</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_max</span> <span class="o">-</span> <span class="n">le</span><span class="p">)</span> <span class="k">for</span> <span class="n">le</span> <span class="ow">in</span> <span class="n">us_lens</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">us_pois</span><span class="p">,</span> <span class="n">us_msks</span><span class="p">,</span> <span class="n">len_max</span>
+
+
+<span class="k">def</span> <span class="nf">split_validation</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span> <span class="n">valid_portion</span><span class="p">):</span>
+    <span class="n">train_set_x</span><span class="p">,</span> <span class="n">train_set_y</span> <span class="o">=</span> <span class="n">train_set</span>
+    <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_set_x</span><span class="p">)</span>
+    <span class="n">sidx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">sidx</span><span class="p">)</span>
+    <span class="n">n_train</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">n_samples</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">valid_portion</span><span class="p">)))</span>
+    <span class="n">valid_set_x</span> <span class="o">=</span> <span class="p">[</span><span class="n">train_set_x</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sidx</span><span class="p">[</span><span class="n">n_train</span><span class="p">:]]</span>
+    <span class="n">valid_set_y</span> <span class="o">=</span> <span class="p">[</span><span class="n">train_set_y</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sidx</span><span class="p">[</span><span class="n">n_train</span><span class="p">:]]</span>
+    <span class="n">train_set_x</span> <span class="o">=</span> <span class="p">[</span><span class="n">train_set_x</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sidx</span><span class="p">[:</span><span class="n">n_train</span><span class="p">]]</span>
+    <span class="n">train_set_y</span> <span class="o">=</span> <span class="p">[</span><span class="n">train_set_y</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sidx</span><span class="p">[:</span><span class="n">n_train</span><span class="p">]]</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">train_set_x</span><span class="p">,</span> <span class="n">train_set_y</span><span class="p">),</span> <span class="p">(</span><span class="n">valid_set_x</span><span class="p">,</span> <span class="n">valid_set_y</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Data</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">inputs</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">len_max</span> <span class="o">=</span> <span class="n">data_masks</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">len_max</span> <span class="o">=</span> <span class="n">len_max</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shuffle</span> <span class="o">=</span> <span class="n">shuffle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span>
+
+    <span class="k">def</span> <span class="nf">generate_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shuffle</span><span class="p">:</span>
+            <span class="n">shuffled_arg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">shuffled_arg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="n">shuffled_arg</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="p">[</span><span class="n">shuffled_arg</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">shuffled_arg</span><span class="p">]</span>
+        <span class="n">n_batch</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">/</span> <span class="n">batch_size</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">%</span> <span class="n">batch_size</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">n_batch</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">slices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_batch</span> <span class="o">*</span> <span class="n">batch_size</span><span class="p">),</span> <span class="n">n_batch</span><span class="p">)</span>
+        <span class="n">slices</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">slices</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][:(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="n">batch_size</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_batch</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))]</span>
+        <span class="k">return</span> <span class="n">slices</span>
+
+    <span class="k">def</span> <span class="nf">get_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="n">inputs</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">items</span><span class="p">,</span> <span class="n">n_node</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">alias_inputs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">u_input</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
+            <span class="n">n_node</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">u_input</span><span class="p">)))</span>
+        <span class="n">max_n_node</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">n_node</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">u_input</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">u_input</span><span class="p">)</span>
+            <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">max_n_node</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">node</span><span class="p">))</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">u_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">max_n_node</span><span class="p">,</span> <span class="n">max_n_node</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">u_input</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">u_input</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="n">u_input</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="n">u_input</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">u_A</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">u_sum_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u_A</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">u_sum_in</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">u_sum_in</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">u_A_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">u_A</span><span class="p">,</span> <span class="n">u_sum_in</span><span class="p">)</span>
+            <span class="n">u_sum_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u_A</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">u_sum_out</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">u_sum_out</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">u_A_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">u_A</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">u_sum_out</span><span class="p">)</span>
+            <span class="n">u_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">u_A_in</span><span class="p">,</span> <span class="n">u_A_out</span><span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+            <span class="n">A</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u_A</span><span class="p">)</span>
+            <span class="n">alias_inputs</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">u_input</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">alias_inputs</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">targets</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SelfAttentionNetwork</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">n_node</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SelfAttentionNetwork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">hiddenSize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_node</span> <span class="o">=</span> <span class="n">n_node</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">batchSize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformerEncoderLayer</span> <span class="o">=</span> <span class="n">TransformerEncoderLayer</span><span class="p">(</span><span class="n">d_model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">nhead</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">nhead</span><span class="p">,</span><span class="n">dim_feedforward</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">*</span> <span class="n">opt</span><span class="o">.</span><span class="n">feedforward</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformerEncoder</span> <span class="o">=</span> <span class="n">TransformerEncoder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transformerEncoderLayer</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">layer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loss_function</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">lr</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">l2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">StepLR</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">lr_dc_step</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">lr_dc</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_parameters</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">stdv</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">weight</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">weight</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="o">-</span><span class="n">stdv</span><span class="p">,</span> <span class="n">stdv</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">compute_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+        <span class="n">ht</span> <span class="o">=</span> <span class="n">hidden</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">long</span><span class="p">(),</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># batch_size x latent_size</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">weight</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>  <span class="c1"># n_nodes x latent_size</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">ht</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">scores</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+        <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">hidden</span> <span class="o">=</span> <span class="n">hidden</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span>
+        <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformerEncoder</span><span class="p">(</span><span class="n">hidden</span><span class="p">)</span>
+        <span class="n">hidden</span> <span class="o">=</span> <span class="n">hidden</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">hidden</span>
+
+
+<span class="k">def</span> <span class="nf">trans_to_cuda</span><span class="p">(</span><span class="n">variable</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">variable</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">variable</span>
+
+
+<span class="k">def</span> <span class="nf">trans_to_cpu</span><span class="p">(</span><span class="n">variable</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">variable</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">variable</span>
+
+
+<span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">alias_inputs</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get_slice</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">alias_inputs</span> <span class="o">=</span> <span class="n">trans_to_cuda</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">alias_inputs</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">())</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">trans_to_cuda</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">())</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">trans_to_cuda</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">())</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">trans_to_cuda</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">())</span>
+    <span class="n">hidden</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+    <span class="n">get</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">hidden</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">alias_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+    <span class="n">seq_hidden</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alias_inputs</span><span class="p">))</span><span class="o">.</span><span class="n">long</span><span class="p">()])</span>
+    <span class="k">return</span> <span class="n">targets</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">compute_scores</span><span class="p">(</span><span class="n">seq_hidden</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">train_test</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span><span class="p">):</span>    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;start training: &#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="n">total_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">slices</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">generate_batch</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">slices</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">slices</span><span class="p">))):</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">targets</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">train_data</span><span class="p">)</span>
+        <span class="n">targets</span> <span class="o">=</span> <span class="n">trans_to_cuda</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">())</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">loss_function</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">targets</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">%</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">slices</span><span class="p">)</span> <span class="o">/</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">%d</span><span class="s1">/</span><span class="si">%d</span><span class="s1">] Loss: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">slices</span><span class="p">),</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">Loss:</span><span class="se">\t</span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">total_loss</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;start predicting: &#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">hit</span><span class="p">,</span> <span class="n">mrr</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">slices</span> <span class="o">=</span> <span class="n">test_data</span><span class="o">.</span><span class="n">generate_batch</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">slices</span><span class="p">:</span>
+        <span class="n">targets</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">test_data</span><span class="p">)</span>
+        <span class="n">sub_scores</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">topk</span><span class="p">(</span><span class="mi">20</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sub_scores</span> <span class="o">=</span> <span class="n">trans_to_cpu</span><span class="p">(</span><span class="n">sub_scores</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">score</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">mask</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sub_scores</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">test_data</span><span class="o">.</span><span class="n">mask</span><span class="p">):</span>
+            <span class="n">hit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">score</span> <span class="o">==</span> <span class="n">target</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">mrr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mrr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">score</span> <span class="o">==</span> <span class="n">target</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">hit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">hit</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="n">mrr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mrr</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">hit</span><span class="p">,</span> <span class="n">mrr</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="run">
+<h2>Run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--dataset&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;diginetica&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;dataset name: diginetica/yoochoose1_64&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--batchSize&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;input batch size&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--hiddenSize&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;hidden state size&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--nhead&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;the number of heads of multi-head attention&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--layer&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;number of SAN layers&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--feedforward&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;the multipler of hidden state size&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--epoch&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;the number of epochs to train for&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--lr&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;learning rate&#39;</span><span class="p">)</span>  <span class="c1"># [0.001, 0.0005, 0.0001]</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--lr_dc&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;learning rate decay rate&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--lr_dc_step&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;the number of steps after which the learning rate decay&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--l2&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;l2 penalty&#39;</span><span class="p">)</span>  <span class="c1"># [0.001, 0.0005, 0.0001, 0.00005, 0.00001]</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--patience&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;the number of epoch to wait before early stop &#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--validation&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;validation&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--valid_portion&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;split the portion of training set as validation set&#39;</span><span class="p">)</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">{})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Namespace(batchSize=100, dataset=&#39;diginetica&#39;, epoch=12, feedforward=4, hiddenSize=96, l2=1e-05, layer=1, lr=0.001, lr_dc=0.1, lr_dc_step=3, nhead=2, patience=10, valid_portion=0.1, validation=False)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">train_data</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">dataset</span> <span class="o">+</span> <span class="s1">&#39;/train.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">validation</span><span class="p">:</span>
+        <span class="n">train_data</span><span class="p">,</span> <span class="n">valid_data</span> <span class="o">=</span> <span class="n">split_validation</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">valid_portion</span><span class="p">)</span>
+        <span class="n">test_data</span> <span class="o">=</span> <span class="n">valid_data</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">test_data</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">dataset</span> <span class="o">+</span> <span class="s1">&#39;/test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+
+    <span class="n">train_data</span> <span class="o">=</span> <span class="n">Data</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">test_data</span> <span class="o">=</span> <span class="n">Data</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="c1"># n_node = 37484</span>
+    <span class="n">n_node</span> <span class="o">=</span> <span class="mi">43098</span>
+    <span class="c1"># if opt.dataset == &#39;diginetica&#39;:</span>
+    <span class="c1">#     n_node = 43098        </span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">trans_to_cuda</span><span class="p">(</span><span class="n">SelfAttentionNetwork</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="n">n_node</span><span class="p">))</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">best_result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">best_epoch</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">bad_counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">epoch</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------------------------&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;epoch: &#39;</span><span class="p">,</span> <span class="n">epoch</span><span class="p">)</span>
+        <span class="n">hit</span><span class="p">,</span> <span class="n">mrr</span> <span class="o">=</span> <span class="n">train_test</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span><span class="p">)</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">hit</span> <span class="o">&gt;=</span> <span class="n">best_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">best_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">hit</span>
+            <span class="n">best_epoch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">epoch</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">mrr</span> <span class="o">&gt;=</span> <span class="n">best_result</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">best_result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">mrr</span>
+            <span class="n">best_epoch</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">epoch</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best Result:&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">Recall@20:</span><span class="se">\t</span><span class="si">%.4f</span><span class="se">\t</span><span class="s1">MMR@20:</span><span class="se">\t</span><span class="si">%.4f</span><span class="se">\t</span><span class="s1">Epoch:</span><span class="se">\t</span><span class="si">%d</span><span class="s1">,</span><span class="se">\t</span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span> <span class="p">(</span><span class="n">best_result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">best_result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">best_epoch</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">best_epoch</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">bad_counter</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">flag</span>
+        <span class="k">if</span> <span class="n">bad_counter</span> <span class="o">&gt;=</span> <span class="n">opt</span><span class="o">.</span><span class="n">patience</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------------------------&#39;</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Run time: </span><span class="si">%f</span><span class="s2"> s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------
+epoch:  0
+start training:  2021-10-10 07:55:45.273836
+[0/7195] Loss: 10.6677
+[1440/7195] Loss: 8.5698
+[2880/7195] Loss: 7.1619
+[4320/7195] Loss: 5.8865
+[5760/7195] Loss: 5.8675
+	Loss:	49098.215
+start predicting:  2021-10-10 08:06:39.781629
+Best Result:
+	Recall@20:	45.9151	MMR@20:	14.8896	Epoch:	0,	0
+-------------------------------------------------------
+epoch:  1
+start training:  2021-10-10 08:07:08.585240
+[0/7195] Loss: 5.3129
+[1440/7195] Loss: 5.2753
+[2880/7195] Loss: 4.5847
+[4320/7195] Loss: 5.3179
+[5760/7195] Loss: 5.1656
+	Loss:	37207.652
+start predicting:  2021-10-10 08:18:04.376789
+Best Result:
+	Recall@20:	47.9033	MMR@20:	15.5292	Epoch:	1,	1
+-------------------------------------------------------
+epoch:  2
+start training:  2021-10-10 08:18:33.538617
+[0/7195] Loss: 4.8722
+[1440/7195] Loss: 5.0588
+[2880/7195] Loss: 5.4700
+[4320/7195] Loss: 4.4588
+[5760/7195] Loss: 5.0475
+	Loss:	35667.793
+start predicting:  2021-10-10 08:29:30.268410
+Best Result:
+	Recall@20:	48.6115	MMR@20:	15.7555	Epoch:	2,	2
+-------------------------------------------------------
+epoch:  3
+start training:  2021-10-10 08:29:59.568936
+[0/7195] Loss: 4.9349
+[1440/7195] Loss: 4.6859
+[2880/7195] Loss: 4.5667
+[4320/7195] Loss: 4.1434
+[5760/7195] Loss: 3.9767
+	Loss:	30751.988
+start predicting:  2021-10-10 08:40:54.180745
+Best Result:
+	Recall@20:	51.3638	MMR@20:	17.1727	Epoch:	3,	3
+-------------------------------------------------------
+epoch:  4
+start training:  2021-10-10 08:41:22.553395
+[0/7195] Loss: 4.2543
+[1440/7195] Loss: 3.8915
+[2880/7195] Loss: 3.8105
+[4320/7195] Loss: 4.2378
+[5760/7195] Loss: 4.0140
+	Loss:	29448.672
+start predicting:  2021-10-10 08:52:09.892111
+Best Result:
+	Recall@20:	51.3638	MMR@20:	17.1727	Epoch:	3,	3
+-------------------------------------------------------
+epoch:  5
+start training:  2021-10-10 08:52:38.087261
+[0/7195] Loss: 3.8150
+[1440/7195] Loss: 3.8234
+[2880/7195] Loss: 3.5714
+[4320/7195] Loss: 4.0254
+[5760/7195] Loss: 4.2898
+	Loss:	28780.891
+start predicting:  2021-10-10 09:03:25.912218
+Best Result:
+	Recall@20:	51.3638	MMR@20:	17.1727	Epoch:	3,	3
+-------------------------------------------------------
+epoch:  6
+start training:  2021-10-10 09:03:54.540505
+[0/7195] Loss: 4.1088
+[1440/7195] Loss: 3.8025
+[2880/7195] Loss: 3.5856
+[4320/7195] Loss: 4.0085
+[5760/7195] Loss: 3.7290
+	Loss:	27613.971
+start predicting:  2021-10-10 09:14:44.462629
+Best Result:
+	Recall@20:	51.3638	MMR@20:	17.1727	Epoch:	3,	3
+-------------------------------------------------------
+epoch:  7
+start training:  2021-10-10 09:15:13.075455
+[0/7195] Loss: 3.8948
+[1440/7195] Loss: 3.9878
+[2880/7195] Loss: 4.3885
+[4320/7195] Loss: 3.9052
+[5760/7195] Loss: 3.6860
+	Loss:	27512.902
+start predicting:  2021-10-10 09:26:01.322491
+Best Result:
+	Recall@20:	51.3638	MMR@20:	17.1727	Epoch:	3,	3
+-------------------------------------------------------
+epoch:  8
+start training:  2021-10-10 09:26:29.612021
+[0/7195] Loss: 3.9779
+[1440/7195] Loss: 3.8012
+[2880/7195] Loss: 3.7224
+[4320/7195] Loss: 3.8879
+[5760/7195] Loss: 3.7163
+	Loss:	27426.121
+start predicting:  2021-10-10 09:37:17.465449
+Best Result:
+	Recall@20:	51.3638	MMR@20:	17.1727	Epoch:	3,	3
+-------------------------------------------------------
+epoch:  9
+start training:  2021-10-10 09:37:45.967249
+[0/7195] Loss: 3.6714
+[1440/7195] Loss: 3.8326
+[2880/7195] Loss: 3.6461
+[4320/7195] Loss: 3.6942
+[5760/7195] Loss: 3.9922
+	Loss:	27279.148
+start predicting:  2021-10-10 09:48:36.979269
+Best Result:
+	Recall@20:	51.3638	MMR@20:	17.1727	Epoch:	3,	3
+-------------------------------------------------------
+epoch:  10
+start training:  2021-10-10 09:49:05.290149
+[0/7195] Loss: 3.7560
+[1440/7195] Loss: 3.6283
+[2880/7195] Loss: 3.7068
+[4320/7195] Loss: 4.2068
+[5760/7195] Loss: 3.5650
+	Loss:	27270.990
+start predicting:  2021-10-10 09:59:52.720394
+Best Result:
+	Recall@20:	51.3638	MMR@20:	17.1727	Epoch:	3,	3
+-------------------------------------------------------
+epoch:  11
+start training:  2021-10-10 10:00:20.799292
+[0/7195] Loss: 4.1372
+[1440/7195] Loss: 3.9532
+[2880/7195] Loss: 3.6319
+[4320/7195] Loss: 3.4573
+[5760/7195] Loss: 3.6855
+	Loss:	27264.115
+start predicting:  2021-10-10 10:11:09.142454
+Best Result:
+	Recall@20:	51.3638	MMR@20:	17.1727	Epoch:	3,	3
+-------------------------------------------------------
+Run time: 8152.358966 s
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sparsh-ai/transformer-rec",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="T757997_SASRec_in_PyTorch.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">SASRec in PyTorch</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="T472955_GC_SAN_in_PyTorch.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">GC-SAN in PyTorch</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Sparsh A.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
