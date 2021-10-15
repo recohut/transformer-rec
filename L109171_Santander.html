@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search &#8212; transformer-rec</title>
+    <title>Santander &#8212; transformer-rec</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -33,7 +33,6 @@
     
   <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
@@ -43,16 +42,20 @@
     <script src="_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" />
-  <script src="searchindex.js" defer></script>
-  
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Taobao" href="L850171_Taobao.html" />
+    <link rel="prev" title="SR-SAN" href="C306687_SR_SAN.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
-
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
@@ -73,7 +76,7 @@
       <h1 class="site-logo" id="site-title">transformer-rec</h1>
       
     </a>
-</div><form class="bd-search d-flex align-items-center" action="#" method="get">
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -191,9 +194,9 @@
   Case studies
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="L109171_Santander.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Santander
   </a>
  </li>
@@ -245,6 +248,23 @@
             </button>
             
             
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/L109171_Santander.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
             <!-- Source interaction buttons -->
 
             <!-- Full screen (wrap in <a> to have style consistency -->
@@ -255,6 +275,31 @@
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/sparsh-ai/transformer-rec/main?urlpath=lab/tree/docs/L109171_Santander.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/sparsh-ai/transformer-rec/blob/main/docs/L109171_Santander.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
 
         </div>
 
@@ -269,36 +314,41 @@
         
               <div>
                 
-  <h1 id="search-documentation">Search</h1>
-  
-  <noscript>
-  <div class="admonition warning">
-  <p>
-    Please activate JavaScript to enable the search
-    functionality.
-  </p>
-  </div>
-  </noscript>
-  
-  
-  <p>
-    Searching for multiple words only shows matches that contain
-    all words.
-  </p>
-  
-  
-  <form action="" method="get">
-    <input type="text" name="q" aria-labelledby="search-documentation" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-    <input type="submit" value="search" />
-    <span id="search-progress" style="padding-left: 10px"></span>
-  </form>
-  
-  
-  
-  <div id="search-results">
-  
-  </div>
-  
+  <div class="tex2jax_ignore mathjax_ignore section" id="santander">
+<h1>Santander<a class="headerlink" href="#santander" title="Permalink to this headline">¶</a></h1>
+<p>The goal of the bank is to predict which new products customers will purchase. The data starts on 2015–01–28, and has monthly records of the products each customer has, such as a credit card, savings account, etc. In addition, the dataset also records user personal data such as average income, age, gender, and so on. The monthly statistics are provided until 2015–05–28. Finally, the model predicts which additional products a customer will start using from the following month, 2016–06–28. Thus, the dataset spans 17 months from 2015–01–28 to 2016–05–28, and the output set contains only the timestamp corresponding to 2016–06–28. Models are therefore trained on sequences of 16 months to predict products acquired on their respective last month.</p>
+<p>In <a class="reference external" href="https://davideliu.com/2020/12/30/how-genify-used-a-transformer-based-model-to-build-a-recommender-system-that-outperforms-industry-benchmarks/">this</a> article, Genify discussed their approach towards this use case. They first used XGBoost for feature importance and selected the following features:</p>
+<ul class="simple">
+<li><p><strong>Seniority</strong>: (integer in range 0–255) how long the user is a client of the bank;</p></li>
+<li><p><strong>Age</strong>: (integer) age of the user;</p></li>
+<li><p><strong>Segmentation</strong>: (category) status of the user: “01-VIP”, “02 -Individuals”, “03 -college graduated”.</p></li>
+<li><p><strong>Gross household income</strong>: (integer) user’s yearly income based on his region of residence.</p></li>
+</ul>
+<p>As part of preprocessing, they normalized the integer values and one-hot encoded the segmentation categories. Missing values are filled with mean. To make it clearer, let’s represent how a “word” of the sequence would look like after pre-processing.</p>
+<p><center><img src='_images/L109171_1.png'></p></center><p>Note that, except for “Gross household income,” “Age,” and “Seniority,” all features are binary, and their concatenation forms a 42 elements array. Finally, the input to the model is a sequence formed by 16 words grouped in batches of 32.</p>
+<p><center><img src='_images/L109171_2.png'></p></center><p>The model takes a sequence of 16 months of user’s history as an input and learns to predict the items acquired in the very last month. The model is composed of 6 multi-head encoder attention layers with 7 attention heads.</p>
+<p>Each of those layers is followed by a 2048 size feed-forward layer. Before each attention and feed-forward layer we have a batch-normalization layer. After each layer, we have a dropout layer with a dropout chance of 0.5 to reduce overfitting. On top of the encoder we have a feed-forward layer followed by a softmax layer, which are used to predict the probability of an item owned in the last month. An item is considered as owned if it probability is &gt; 0.5. Similarly, acquired items can be predicted by excluding the items owned in the previous month from the original predictions. Therefore, the model learns using a binary cross entropy loss function and Adam as optimizer. Regarding the learning rate, they adopted a Rectified-Adam warm-up scheduling for the learning rate, with a peak after 10 epochs and decay until the 100th epoch when the training process terminates. Having a warm-up scheduling assures to have a higher learning rate at the beginning of the training when the parameters of the model are still far from the optimum. After a certain peak it gradually decreases to provide a more stable training.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sparsh-ai/transformer-rec",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
@@ -309,6 +359,24 @@
 
 <div class='prev-next-bottom'>
     
+    <div id="prev">
+        <a class="left-prev" href="C306687_SR_SAN.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">SR-SAN</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="L850171_Taobao.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Taobao</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         
